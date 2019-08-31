@@ -3,21 +3,22 @@
 ### Register & Login VC
 ![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Login.png)
 
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Refresh.gif)
+### 刷新微博
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/刷新微博.gif)
 
-### Status VC
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Status.gif)
+### 评论微博
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/评论微博.gif)
 
-### Comment 
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Comment.gif)
+### 发送微博
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/发微博.gif)
 
-### Post a status
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Compose.gif)
+### 查看消息
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/查看消息.gif)
 
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/PicturePicker.png)
+### 视频界面
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/视频界面.gif)
 
-### Message
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Message.gif)
+### 个人界面
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/个人界面.gif)
 
-### Profile
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Profile.png)
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/个人界面.png)
