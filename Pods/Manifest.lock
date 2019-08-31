@@ -1,0 +1,49 @@
+PODS:
+  - Alamofire (4.8.2)
+  - FLAnimatedImage (1.0.12)
+  - Masonry (1.1.0)
+  - MJRefresh (3.2.0)
+  - QorumLogs (0.9)
+  - SDWebImage (4.4.7):
+    - SDWebImage/Core (= 4.4.7)
+  - SDWebImage/Core (4.4.7)
+  - SDWebImage/GIF (4.4.7):
+    - FLAnimatedImage (~> 1.0)
+    - SDWebImage/Core
+  - SnapKit (4.2.0)
+  - SVProgressHUD (2.2.5)
+
+DEPENDENCIES:
+  - Alamofire
+  - Masonry
+  - MJRefresh
+  - QorumLogs
+  - SDWebImage (~> 4.0)
+  - SDWebImage/GIF
+  - SnapKit
+  - SVProgressHUD
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - FLAnimatedImage
+    - Masonry
+    - MJRefresh
+    - QorumLogs
+    - SDWebImage
+    - SnapKit
+    - SVProgressHUD
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  QorumLogs: 9a484df6973a3697ac79fe2273140fde6b36dccc
+  SDWebImage: c10d14a8883ebd89664f02a422006f66a85c0c5d
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+
+PODFILE CHECKSUM: 9df6b5c6235d94bd7d1f7eb3c9229b3b77c4b8af
+
+COCOAPODS: 1.7.5
