@@ -1,8 +1,5 @@
 # WeiBo-social-media-app-
 
-### Register & Login VC
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Login.png)
-
 ### 刷新微博
 ![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/刷新微博.gif)
 
@@ -20,5 +17,3 @@
 
 ### 个人界面
 ![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/个人界面.gif)
-
-![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/个人界面.png)
