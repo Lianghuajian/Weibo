@@ -22,7 +22,7 @@ class EmoticonView: UIView {
         collectionviews.scrollToItem(at: indexpath, at: .left, animated: true)
     }
     
-    //MARK: - 懒加载控件
+    //MARK: - 成员变量
     lazy var collectionviews = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: EmoticonLayout())
     lazy var toolbar = UIToolbar()
     ///表情包

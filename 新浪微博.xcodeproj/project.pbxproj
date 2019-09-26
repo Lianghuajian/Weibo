@@ -124,7 +124,6 @@
 		69365E5D226D45D000E6E53E /* db.sql in Resources */ = {isa = PBXBuildFile; fileRef = 69365E5C226D45D000E6E53E /* db.sql */; };
 		69365E5F226D6BE800E6E53E /* StatusDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69365E5E226D6BE800E6E53E /* StatusDAL.swift */; };
 		6936FC5E222B724C002B9A19 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936FC5D222B724C002B9A19 /* MainViewController.swift */; };
-		6936FC60222B7284002B9A19 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936FC5F222B7284002B9A19 /* HomeTableViewController.swift */; };
 		6936FC62222B7294002B9A19 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936FC61222B7294002B9A19 /* MessageViewController.swift */; };
 		6936FC64222B72A1002B9A19 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936FC63222B72A1002B9A19 /* DiscoverViewController.swift */; };
 		6936FC66222B72B2002B9A19 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936FC65222B72B2002B9A19 /* ProfileViewController.swift */; };
@@ -506,7 +505,6 @@
 		69365E5C226D45D000E6E53E /* db.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = db.sql; sourceTree = "<group>"; };
 		69365E5E226D6BE800E6E53E /* StatusDAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDAL.swift; sourceTree = "<group>"; };
 		6936FC5D222B724C002B9A19 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		6936FC5F222B7284002B9A19 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		6936FC61222B7294002B9A19 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		6936FC63222B72A1002B9A19 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		6936FC65222B72B2002B9A19 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -1525,7 +1523,6 @@
 				692CF50E22D654D7000E0273 /* UserDetailViewController */,
 				692F083222C4ABD500641A26 /* HomeViewController */,
 				69396A7B2248F3A00005E981 /* StatusCell */,
-				6936FC5F222B7284002B9A19 /* HomeTableViewController.swift */,
 				69215C082276E43C00962D46 /* HomeWebViewController.swift */,
 			);
 			path = Home;
@@ -2203,7 +2200,6 @@
 				69AD9850230F827000ACA5AC /* JXPagingView.swift in Sources */,
 				692EF4AF22D46689008A2F81 /* CommentViewModel.swift in Sources */,
 				692EF4A922D4541D008A2F81 /* CommentCell.swift in Sources */,
-				6936FC60222B7284002B9A19 /* HomeTableViewController.swift in Sources */,
 				692C784E22D89E8500F81637 /* JXCategoryImageCellModel.m in Sources */,
 				692EF4B322D4810A008A2F81 /* CommentTableViewCell.swift in Sources */,
 				692F083122C4AAB700641A26 /* PageViewController.swift in Sources */,

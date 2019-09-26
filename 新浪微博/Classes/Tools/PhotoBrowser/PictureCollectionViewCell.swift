@@ -166,7 +166,7 @@ class PictureCollectionViewCell: UICollectionViewCell {
         fatalError("PictureCollectionView初始化错误，不能使用xib去加载")
     }
     
-    //MARK: - 懒加载控件
+    //MARK: - 成员变量
     lazy var scrollview = UIScrollView()
     lazy var imageview = FLAnimatedImageView()
     lazy var placeholderImageView = ProgressImageView()

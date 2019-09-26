@@ -75,7 +75,7 @@ class PhotoBrowserViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - 懒加载控件
+    //MARK: - 成员变量
     lazy var collectionView = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: PictureCollectionsFlowLayout())
     lazy var saveBtn = UIButton.init(text: "保存", textColor: .white, backImage: nil, isBack: false,backgroundColor : .lightGray)
     lazy var closeBtn = UIButton.init(text: "取消", textColor: .white, backImage: nil, isBack: false,backgroundColor : .lightGray)
