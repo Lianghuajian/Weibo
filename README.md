@@ -1,23 +1,19 @@
 # WeiBo-social-media-app-
 
-### Register & Login VC
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Login.png)
+### 刷新微博
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/刷新微博.gif)
 
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Refresh.gif)
+### 评论微博
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/评论微博.gif)
 
-### Status VC
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Status.gif)
+### 发送微博
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/发微博.gif)
 
-### Comment 
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Comment.gif)
+### 查看消息
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/查看消息.gif)
 
-### Post a status
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Compose.gif)
+### 视频界面
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/视频界面.gif)
 
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/PicturePicker.png)
-
-### Message
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Message.gif)
-
-### Profile
-![avatar](https://github.com/Lianghuajian/WeiBo-social-media-app-/blob/master/ReadmeImages/Profile.png)
+### 个人界面
+![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/个人界面.gif)
