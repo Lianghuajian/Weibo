@@ -2,7 +2,7 @@
 
 import XCTest
 //@testable import ___VARIABLE_productName:identifier___
-
+//单元测试
 class ___FILEBASENAMEASIDENTIFIER___: XCTestCase {
 
     override func setUp() {

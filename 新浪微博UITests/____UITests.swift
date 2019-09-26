@@ -1,7 +1,7 @@
 //___FILEHEADER___
 
 import XCTest
-
+//UI单元测试
 class ___FILEBASENAMEASIDENTIFIER___: XCTestCase {
 
     override func setUp() {
