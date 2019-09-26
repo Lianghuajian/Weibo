@@ -1,4 +1,3 @@
-# WeiBo-social-media-app-
 
 ### 刷新微博
 ![avatar](https://github.com/Lianghuajian/Weibo/blob/master/README/刷新微博.gif)
