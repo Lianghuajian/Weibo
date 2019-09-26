@@ -9,16 +9,14 @@
 import UIKit
 
 class VideoViewController: UIViewController {
-
+    //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
     }
-    
-    var player : WMPlayer?
-    
-    var playerModel : WMPlayerModel?
-    
+    deinit {
+        releasePlayer()
+    }
     func setUpUI(){
         if player == nil
         {
@@ -40,9 +38,12 @@ class VideoViewController: UIViewController {
         self.player?.removeFromSuperview()
         self.player = nil
     }
-    deinit {
-        releasePlayer()
-    }
+    
+    //MARK: - 成员变量
+    var player : WMPlayer?
+    
+    var playerModel : WMPlayerModel?
+    
 }
 
 extension VideoViewController : WMPlayerDelegate

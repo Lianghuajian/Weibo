@@ -56,7 +56,7 @@ class MessageTableViewCellTypeTwo: UITableViewCell {
         }
     }
     
-    //MARK: - 懒加载属性
+    //MARK: - 成员变量
     ///左侧图标：占据cell高度0.75
     lazy var iconImageView : UIImageView = {
        let iv = UIImageView.init()

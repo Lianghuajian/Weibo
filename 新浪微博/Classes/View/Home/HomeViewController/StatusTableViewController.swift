@@ -15,8 +15,6 @@ let RetweetedStatusCellID = "RetweetedStatusCellID"
 
 class StatusTableViewController: VisitorViewController {
     
-    ///用与在网络错误的时候，防止用户多次刷新
-    //    private var reloadSignal = 0
     
     //MARK: - 生命周期
     override func viewWillAppear(_ animated: Bool) {
@@ -87,88 +85,7 @@ class StatusTableViewController: VisitorViewController {
         finishComment()
     }
     
-    @objc func HomeTVCKeyBoardWillChange(_ notification : NSNotification)
-    {
-        
-        //拿到键盘改变前后的高度,相对于window
-        let rect = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let duration = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
-        let curve = (notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber).intValue
-        
-        var offset : CGFloat = 0
-        
-        if rect.origin.y == screenHeight
-        {
-            offset = 0
-        }
-        else
-        {
-            //(self.view.frame.height - screenHeight)由于我们的keyBoardView是添加到view上面的，view的高度比window高一点
-            offset = screenHeight-rect.origin.y + CommentKeyBoardView.recommendHeight + (self.view.frame.height - screenHeight)
-        }
-        
-        //第一次打开键盘输入字母会再次进入这个方法，即使rect没有改变
-        if rect != lastKeyBoardRect
-        {
-            lastKeyBoardRect = rect
-            
-            var contentOffset : CGPoint!
-            
-            if rect.origin.y == screenHeight
-            {
-                
-                //键盘收回到屏幕下方
-                //contentOffset = originalContentOffSet
-                contentOffset = CGPoint.init(x:0, y: self.tableView.contentOffset.y - (commentViewPosition.y - commentKeyBoardView.frame.origin.y))
-                //更新文字
-                commentTable[lastTextViewTag] = commentKeyBoardView.textView.emoticonText()
-                
-            }
-            else
-            {
-                
-                //键盘弹出
-                if commentKeyBoardView.textView.inputView == nil
-                {
-                    
-                    if isUsingKeyBoard
-                    {
-                        
-                        contentOffset = CGPoint.init(x: 0, y: originalContentOffSet.y + commentViewPosition.y - (rect.origin.y - commentKeyBoardView.bounds.size.height))
-                        
-                    }else
-                    {
-                        isUsingKeyBoard = true
-                        contentOffset = CGPoint.init(x: 0, y: self.tableView.contentOffset.y + commentViewPosition.y - (rect.origin.y - commentKeyBoardView.bounds.size.height))
-                    }
-                }
-                else
-                {
-                    //表情键盘等其他键盘的尺寸
-                    let otherKeyBoardRect =  commentKeyBoardView.textView.inputView!.bounds.size
-                    contentOffset = CGPoint.init(x:0 , y: self.tableView.contentOffset.y - (253.0 - otherKeyBoardRect.height))
-                }
-            }
-            //更新按钮的位置，不然切换键盘的时候会出现高度叠加
-            //commentViewPosition = CGPoint.init(x: 0, y: commentKeyBoardView.frame.origin.y)
-            //滚动tableView到被textView遮挡
-            //contentOffset的Y增加内容则往上滚动，否则往下
-            self.tableView.setContentOffset(contentOffset, animated: true)
-            
-            
-            UIView.animate(withDuration: duration) {
-                self.commentKeyBoardView.snp.updateConstraints { (make) in
-                    make.top.equalTo(self.view.snp.bottom).offset(-offset)
-                }
-            }
-            
-            //在这里设置的动画时长会被取消掉，因为动画直接到达了终点
-            UIView.animate(withDuration: duration) {
-                UIView.setAnimationCurve(UIView.AnimationCurve.init(rawValue: curve)!)
-                self.view.layoutIfNeeded()
-            }
-        }
-    }
+   
     
     ///注册原创和转发微博cell
     ///设置预估高度
@@ -177,7 +94,6 @@ class StatusTableViewController: VisitorViewController {
     {
         //1.添加子控件
         self.view.addSubview(tableView)
-        
         //2.设置布局
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.snp.top)
@@ -196,7 +112,6 @@ class StatusTableViewController: VisitorViewController {
         tableView.separatorStyle = .none
         
         tableView.estimatedRowHeight = 400
-        
         
         tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: loadStatus)
         (tableView.mj_header as? MJRefreshStateHeader)?.lastUpdatedTimeLabel.isHidden = true
@@ -317,7 +232,89 @@ class StatusTableViewController: VisitorViewController {
         self.viewAboveTableView.isHidden = true
     }
     
-    //MARK: - 懒加载控件
+    @objc func HomeTVCKeyBoardWillChange(_ notification : NSNotification)
+    {
+        
+        //拿到键盘改变前后的高度,相对于window
+        let rect = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let duration = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        let curve = (notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber).intValue
+        
+        var offset : CGFloat = 0
+        
+        if rect.origin.y == screenHeight
+        {
+            offset = 0
+        }
+        else
+        {
+            //(self.view.frame.height - screenHeight)由于我们的keyBoardView是添加到view上面的，view的高度比window高一点
+            offset = screenHeight-rect.origin.y + CommentKeyBoardView.recommendHeight + (self.view.frame.height - screenHeight)
+        }
+        
+        //第一次打开键盘输入字母会再次进入这个方法，即使rect没有改变
+        if rect != lastKeyBoardRect
+        {
+            lastKeyBoardRect = rect
+            
+            var contentOffset : CGPoint!
+            
+            if rect.origin.y == screenHeight
+            {
+                
+                //键盘收回到屏幕下方
+                //contentOffset = originalContentOffSet
+                contentOffset = CGPoint.init(x:0, y: self.tableView.contentOffset.y - (commentViewPosition.y - commentKeyBoardView.frame.origin.y))
+                //更新文字
+                commentTable[lastTextViewTag] = commentKeyBoardView.textView.emoticonText()
+                
+            }
+            else
+            {
+                
+                //键盘弹出
+                if commentKeyBoardView.textView.inputView == nil
+                {
+                    
+                    if isUsingKeyBoard
+                    {
+                        
+                        contentOffset = CGPoint.init(x: 0, y: originalContentOffSet.y + commentViewPosition.y - (rect.origin.y - commentKeyBoardView.bounds.size.height))
+                        
+                    }else
+                    {
+                        isUsingKeyBoard = true
+                        contentOffset = CGPoint.init(x: 0, y: self.tableView.contentOffset.y + commentViewPosition.y - (rect.origin.y - commentKeyBoardView.bounds.size.height))
+                    }
+                }
+                else
+                {
+                    //表情键盘等其他键盘的尺寸
+                    let otherKeyBoardRect =  commentKeyBoardView.textView.inputView!.bounds.size
+                    contentOffset = CGPoint.init(x:0 , y: self.tableView.contentOffset.y - (253.0 - otherKeyBoardRect.height))
+                }
+            }
+            //更新按钮的位置，不然切换键盘的时候会出现高度叠加
+            //commentViewPosition = CGPoint.init(x: 0, y: commentKeyBoardView.frame.origin.y)
+            //滚动tableView到被textView遮挡
+            //contentOffset的Y增加内容则往上滚动，否则往下
+            self.tableView.setContentOffset(contentOffset, animated: true)
+            
+            
+            UIView.animate(withDuration: duration) {
+                self.commentKeyBoardView.snp.updateConstraints { (make) in
+                    make.top.equalTo(self.view.snp.bottom).offset(-offset)
+                }
+            }
+            
+            //在这里设置的动画时长会被取消掉，因为动画直接到达了终点
+            UIView.animate(withDuration: duration) {
+                UIView.setAnimationCurve(UIView.AnimationCurve.init(rawValue: curve)!)
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    //MARK: - 成员变量
     lazy var tableView : UITableView = UITableView.init()
     
     lazy var viewAboveTableView : BackGroundView = {
@@ -402,8 +399,9 @@ class StatusTableViewController: VisitorViewController {
 extension StatusTableViewController : UITableViewDelegate,UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        print(#function,indexPath.row)
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //QL1("调用了numberOfRowsInSection")
         return statusListViewModel.statusList.count
@@ -414,7 +412,7 @@ extension StatusTableViewController : UITableViewDelegate,UITableViewDataSource
         
         let cell = tableView.dequeueReusableCell(withIdentifier: vm.cellID, for: indexPath) as! StatusCell
         
-        cell.selectionStyle = .none
+        vm.indexPath = indexPath
         
         cell.viewModel = vm
         
@@ -540,17 +538,7 @@ extension StatusTableViewController : CommentKeyBoardViewDelegate
                 self.finishComment()
                 SVProgressHUD.showSuccess(withStatus: String.init(format: "成功评论%@的微博",commentKeyBoardView.statusViewModel!.status.user!.screen_name!))
                 
-                //                self.tableView.reloadData()
-                //更新评论
-                //                StatusViewModel.loadAStatus(statusID:commentKeyBoardView.statusViewModel!.status.id , { (statusViewModel) in
-                //                    guard let statusViewModel = statusViewModel else
-                //                    {
-                //                        return
-                //                    }
-                //                    self.statusListViewModel.replaceStatusIn(statusId: statusViewModel.status.id, statusViewModel:statusViewModel)
                 
-                //                    self.statusListViewModel.StatusList
-                //                })
                 
             }
             
@@ -572,11 +560,28 @@ extension StatusTableViewController : ClickLabelDelegate
 
 extension StatusTableViewController : ClickTopViewProtocol
 {
-    func clickClickTopView(viewModel: StatusViewModel) {
+    func clickClickTopView(statusTopView: StatusTopView) {
         let vc = UserDetailViewController()
         vc.hidesBottomBarWhenPushed = true
-        vc.statusViewModel = viewModel
+        vc.statusViewModel = statusTopView.viewModel
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func clickCloseButton(statusTopView: StatusTopView) {
+        
+         let ac = UIAlertController.init(title: "删除微博", message: "确定要删除该条微博吗", preferredStyle: .actionSheet)
+        ac.addAction(.init(title: "确定", style: .destructive, handler: { (action) in
+            self.tableView.beginUpdates()
+            self.statusListViewModel.statusList.remove(at: statusTopView.viewModel!.indexPath!.row)
+            self.tableView.deleteRows(at:[statusTopView.viewModel!.indexPath!] , with: .fade)
+            self.tableView.endUpdates()
+        }))
+        ac.addAction(.init(title: "取消", style: .cancel, handler: { (action) in
+            return
+        }))
+        self.present(ac, animated: true,completion: nil)
+    }
+
 }
 

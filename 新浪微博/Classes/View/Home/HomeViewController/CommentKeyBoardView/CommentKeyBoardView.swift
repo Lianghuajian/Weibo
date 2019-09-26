@@ -151,7 +151,7 @@ class CommentKeyBoardView: UIView {
         }
     }
     
-    //MARK: - 懒加载属性
+    //MARK: - 成员变量
     var tickTimes = 2
     lazy var textView : UITextView = {
         let tv = UITextView()

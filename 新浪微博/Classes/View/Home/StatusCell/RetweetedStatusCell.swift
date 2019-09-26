@@ -31,7 +31,7 @@ class RetweetedStatusCell: StatusCell {
         }
     }
     
-    //MAKR: - 懒加载控件
+    //MAKR: - 成员变量
     ///转发微博的背景
     lazy var backbutton : UIButton = {
         let button = UIButton()
@@ -40,19 +40,19 @@ class RetweetedStatusCell: StatusCell {
     }()
 
     ///转发微博的文字
-    lazy var retweetlabel : FFLabel = FFLabel.init(content: "",
+    lazy var retweetlabel : HLLabel = HLLabel.init(content: "",
                                                    color: .black,
-                                                   size: 14,
+                                                   size: screenHeight*0.0243,
                                                    screenInset: StatusCellMargins)
     }
 
 ///设置布局
 extension RetweetedStatusCell{
     
-     override func SetUpUI() {
+     override func setUpUI() {
         //我们的目的是在原有布局上面添加新的布局，改变不同view的位置
         //先调用父类方法 
-        super.SetUpUI()
+        super.setUpUI()
         //添加控件 注意转发微博要在图片下面
         contentView.insertSubview(backbutton, belowSubview: pictureView)
         
@@ -77,6 +77,6 @@ extension RetweetedStatusCell{
             make.width.equalTo(90)
         }
         //父类实现了对应的代理方法
-        retweetlabel.labelDelegate = self
+        retweetlabel.delegate = self
     }
 }

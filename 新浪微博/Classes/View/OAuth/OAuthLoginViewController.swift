@@ -24,7 +24,7 @@ class OAuthLoginViewController: UIViewController {
     @objc func Close(){
         SVProgressHUD.dismiss()
         navigationController?.popViewController(animated: true)
-//        self.dismiss(animated: true, completion: nil)
+
     }
     
     ///自动填充
@@ -66,7 +66,7 @@ extension OAuthLoginViewController : WKNavigationDelegate
             return
         }
         guard let host = url.host , host == "www.baidu.com" else{
-            print("Still success")
+    
             decisionHandler(.allow)
             return
         }

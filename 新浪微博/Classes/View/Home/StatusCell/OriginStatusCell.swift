@@ -23,8 +23,8 @@ class OriginStatusCell: StatusCell {
     }
 
     //重写父类方法，通过父类init调用这个
-    override func SetUpUI() {
-        super.SetUpUI()
+    override func setUpUI() {
+        super.setUpUI()
         ///添加图片布局
         pictureView.snp.makeConstraints { (make) in
         make.top.equalTo(contentLabel.snp.bottom).offset(StatusCellMargins)

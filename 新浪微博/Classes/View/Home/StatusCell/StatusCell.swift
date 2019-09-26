@@ -31,7 +31,7 @@ class StatusCell: UITableViewCell {
             let text = viewModel?.status.text ?? ""
             
             contentLabel.attributedText = EmoticonsViewModel.shared.emoticonText(string: text, font: contentLabel.font)
-            //计算单图可能会出问题，导致单图的cell中高度是比例前的
+            
             pictureView.viewModel = viewModel
             
             pictureView.snp.updateConstraints{ (make) in
@@ -56,21 +56,21 @@ class StatusCell: UITableViewCell {
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        SetUpUI()
+        setUpUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         //防止别人使用Xib去创建
         fatalError("init(coder:) has not been implemented")
     }
-    //MARK: - 懒加载控件
+    //MARK: - 成员变量
     lazy var topView = StatusTopView()
     
     lazy var bottomView = StatusBottomView()
     
     lazy var pictureView = StatusPictureView()
 
-    lazy var contentLabel : FFLabel = FFLabel.init(content: "微博正文",color: .black, size: 14, screenInset:StatusCellMargins)
+    lazy var contentLabel : HLLabel = HLLabel.init(content: "微博正文",color: .black, size:  screenHeight*0.0246, screenInset:StatusCellMargins)
     
     weak var clickLabelDelegate : ClickLabelDelegate?
     
@@ -79,7 +79,7 @@ class StatusCell: UITableViewCell {
 
 extension StatusCell{
     
-    @objc func SetUpUI(){
+    @objc func setUpUI(){
         
         pictureView.backgroundColor = UIColor.white
         
@@ -110,7 +110,7 @@ extension StatusCell{
             make.height.equalTo(CellIconWidth)
         }
         //3，设置代理
-        contentLabel.labelDelegate = self
+        contentLabel.delegate = self
         bottomView.delegate = self
     }
 }
@@ -132,13 +132,13 @@ extension StatusCell : StatusBottomViewClickDelegate
     }
     
 }
-extension StatusCell : FFLabelDelegate{
-    func labelDidSelectedLinkText(label: FFLabel, text: String) {
-        QL1(text)
-        if text.hasPrefix("http"){
+extension StatusCell : HLLabelDelegate{
+    func didSelectHighLightedText(label: HLLabel, string: String) {
+        if string.hasPrefix("http"){
             //由于我们在微博中点击的链接为短链接(节省资源)，都为httpl开头
-            clickLabelDelegate?.didClickURL(url: URL.init(string: text)!)
+            clickLabelDelegate?.didClickURL(url: URL.init(string: string)!)
         }
         
     }
+
 }

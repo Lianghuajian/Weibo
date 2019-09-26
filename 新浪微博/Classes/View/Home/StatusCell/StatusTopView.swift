@@ -11,7 +11,8 @@ import SnapKit
 import QorumLogs
 
 protocol ClickTopViewProtocol : NSObjectProtocol {
-    func clickClickTopView(viewModel:StatusViewModel)
+    func clickClickTopView(statusTopView:StatusTopView)
+    func clickCloseButton(statusTopView:StatusTopView)
 }
 
 class StatusTopView: UIView {
@@ -40,21 +41,22 @@ class StatusTopView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //MARK: - 懒加载控件
+    //MARK: - 成员变量
     ///用户头像
     private lazy var iconView : UIImageView = UIImageView.init(image: UIImage.init(named: "avatar_default"))
     ///用户名称
-    private lazy var nameLabel : UILabel = UILabel.init(content: "梁华建",color: .gray, size: 14)
+    private lazy var nameLabel : UILabel = UILabel.init(content: "梁华建",color: .gray, size: screenHeight*0.0246)
     ///会员图标 大
     private lazy var memberIconView : UIImageView = UIImageView.init(image:UIImage.init(named: "common_icon_membership_level1"))
     ///认证图标 小
     private lazy var vipIconView : UIImageView = UIImageView.init(image: UIImage.init(named: "avatar_vip"))
     ///时间标签
     private lazy var timeLabel : UILabel = UILabel.init(content:""
-        ,color: .gray , size:11)
+        ,color: .gray , size:screenHeight*0.02)
     ///来源标签
-    private lazy var sourceLabel : UILabel = UILabel.init(content: "来源",color: .gray, size: 11)
+    private lazy var sourceLabel : UILabel = UILabel.init(content: "来源",color: .gray, size: screenHeight*0.02)
     
+    private lazy var closeButton : UIButton = UIButton.init(text: "x", textColor: .gray, backImage: nil, highlight: nil, textSize: screenHeight*0.0246, isBack: false, backgroundColor: .white)
 }
 //MAKR: - 布局视图
 extension StatusTopView
@@ -72,6 +74,7 @@ extension StatusTopView
         self.addSubview(vipIconView)
         self.addSubview(timeLabel)
         self.addSubview(sourceLabel)
+        self.addSubview(closeButton)
         //2.布局
         sepView.snp.makeConstraints { (make) in
             make.top.equalTo(self.snp.top)
@@ -111,30 +114,21 @@ extension StatusTopView
             make.bottom.equalTo(iconView.snp.bottom)
             make.left.equalTo(timeLabel.snp.right).offset(StatusCellMargins)
         }
-        
+        closeButton.snp.makeConstraints { (make) in
+            make.right.equalTo(self.snp.right).offset(-StatusCellMargins)
+            make.top.equalTo(sepView.snp.bottom).offset(StatusCellMargins)
+            make.height.equalTo(44)
+        }
+        closeButton.addTarget(self, action: #selector(clickCloseButton(sender:)), for: .touchUpInside)
         //3.添加手势
-        let tabGesture1 = UITapGestureRecognizer.init(target: self, action: #selector(clickTopView))
-        let tabGesture2 = UITapGestureRecognizer.init(target: self, action: #selector(clickTopView))
-        let tabGesture3 = UITapGestureRecognizer.init(target: self, action: #selector(clickTopView))
-        let tabGesture4 = UITapGestureRecognizer.init(target: self, action: #selector(clickTopView))
-        let tabGesture5 = UITapGestureRecognizer.init(target: self, action: #selector(clickTopView))
-        let tabGesture6 = UITapGestureRecognizer.init(target: self, action: #selector(clickTopView))
-        //    tabGesture.
-        iconView.addGestureRecognizer(tabGesture1)
-        nameLabel.addGestureRecognizer(tabGesture2)
-        memberIconView.addGestureRecognizer(tabGesture3)
-        sourceLabel.addGestureRecognizer(tabGesture4)
-        vipIconView.addGestureRecognizer(tabGesture5)
-        timeLabel.addGestureRecognizer(tabGesture6)
-        iconView.isUserInteractionEnabled = true
-        nameLabel.isUserInteractionEnabled = true
-        memberIconView.isUserInteractionEnabled = true
-        sourceLabel.isUserInteractionEnabled = true
-        vipIconView.isUserInteractionEnabled = true
-        timeLabel.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(clickTopView))
+        self.addGestureRecognizer(tapGesture)
     }
-    
+    @objc func clickCloseButton(sender: UIButton)
+    {
+        clickdelegate?.clickCloseButton(statusTopView:self)
+    }
     @objc func clickTopView(){
-        clickdelegate?.clickClickTopView(viewModel: self.viewModel!)
+        clickdelegate?.clickClickTopView(statusTopView: self)
     }
 }

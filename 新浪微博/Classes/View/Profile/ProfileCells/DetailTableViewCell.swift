@@ -59,7 +59,7 @@ class DetailTableViewCell: UITableViewCell {
         collectionView.dataSource = self
         collectionView.register(DetailCollectionCell.self, forCellWithReuseIdentifier: detailCellID)
     }
-    //MARK: - 懒加载属性
+    //MARK: - 成员变量
     ///头部分割线
     lazy var spaView :UIView = {
         let view = UIView()
@@ -131,7 +131,7 @@ class DetailCollectionCell: UICollectionViewCell {
             make.height.equalTo(11.5)
         }
     }
-    //MARK: - 懒加载属性
+    //MARK: - 成员变量
     lazy var itemLabel : UILabel = {
         let label = UILabel.init(size: 11.5, content: "", color: .black, alignment: .center, lines: 0, breakMode: .byTruncatingTail)
         

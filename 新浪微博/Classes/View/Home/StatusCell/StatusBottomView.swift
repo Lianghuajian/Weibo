@@ -62,11 +62,11 @@ class StatusBottomView: UIView {
         }
     }
     ///转发按钮
-    private lazy var retweetedButton = UIButton.init(text: " 转发", textColor: UIColor.darkGray, backImage: "timeline_icon_retweet", textSize: 12,isBack:false);
+    private lazy var retweetedButton = UIButton.init(text: " 转发", textColor: UIColor.darkGray, backImage: "timeline_icon_retweet", textSize: screenHeight * 0.02,isBack:false);
     ///评论按钮
-    private lazy var commentButton = UIButton.init(text: " 评论", textColor: UIColor.darkGray, backImage: "timeline_icon_comment", textSize: 12,isBack:false);
+    private lazy var commentButton = UIButton.init(text: " 评论", textColor: UIColor.darkGray, backImage: "timeline_icon_comment", textSize: screenHeight * 0.02,isBack:false);
     ///点赞按钮
-    private lazy var likeButton = UIButton.init(text: " 点赞", textColor: UIColor.darkGray, backImage: "timeline_icon_unlike", textSize: 12,isBack:false);
+    private lazy var likeButton = UIButton.init(text: " 点赞", textColor: UIColor.darkGray, backImage: "timeline_icon_unlike", textSize: screenHeight * 0.02,isBack:false);
     
 }
 extension StatusBottomView {
@@ -121,8 +121,25 @@ extension StatusBottomView {
         
         //3.设置监听
         commentButton.addTarget(self, action: #selector(commentClicked), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(likeClicked), for: .touchUpInside)
     }
-    @objc func commentClicked(){
+    @objc func likeClicked(sender:UIButton){
+        
+        let rotateAnimation = CAKeyframeAnimation.init(keyPath: "transform.rotation.z");
+        rotateAnimation.values = [Double.pi*0.07,Double.pi*(-0.14)];
+        rotateAnimation.duration = 0.5
+        rotateAnimation.repeatCount = 1
+        sender.imageView?.layer.add(rotateAnimation, forKey: rotateAnimation.keyPath)
+        
+        let scaleAnimation = CAKeyframeAnimation.init(keyPath: "transform.scale");
+        scaleAnimation.values = [0.8,1.0,1.5];
+        scaleAnimation.keyTimes = [1.0,1.2,1.5]
+        scaleAnimation.calculationMode = .linear
+        sender.imageView?.layer.add(scaleAnimation, forKey: scaleAnimation.keyPath)
+        
+        
+    }
+    @objc func commentClicked(sender:UIButton){
         
       let point = self.convert(CGPoint.init(x: 0, y: self.frame.size.height), to: UIApplication.shared.keyWindow)
         delegate?.commentButtonClick(pointToWindows: point)

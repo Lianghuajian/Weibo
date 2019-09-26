@@ -11,7 +11,7 @@ import UIKit
 import WebKit
 class HomeWebViewController: UIViewController {
     
-    //MARK: - 懒加载控件
+    //MARK: - 成员变量
     lazy var webView : WKWebView = WKWebView()
     
     private var progressView : UIProgressView = {
@@ -20,10 +20,9 @@ class HomeWebViewController: UIViewController {
         proView.progressTintColor = .orange
         return proView
     }()
-    
 
     var url : URL
-    //MARK: - 初始化
+    //MARK: - 生命周期
     init(url:URL) {
         self.url = url
         super.init(nibName: nil, bundle: nil)
@@ -31,10 +30,9 @@ class HomeWebViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //系统在发现view为nil的时候会调用该方法
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         DispatchQueue.main.async {
             self.prepareWebView()
         }
@@ -90,5 +88,25 @@ extension HomeWebViewController : WKNavigationDelegate
           webView.evaluateJavaScript("document.title", completionHandler: { (data, error) in
             self.navigationItem.title = data as? String
         })
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+       guard let url = navigationAction.request.url else
+       {
+        return
+        }
+        let app = UIApplication.shared
+        if url.absoluteString.contains("itunes.apple.com") {
+            if (app.canOpenURL(url))
+            {
+                app.open(url, options:[:], completionHandler: nil)
+            }
+            //取消跳转，打开appStore
+            decisionHandler(WKNavigationActionPolicy.cancel)
+            return
+        }
+        
+        decisionHandler(.allow)
+        
     }
 }

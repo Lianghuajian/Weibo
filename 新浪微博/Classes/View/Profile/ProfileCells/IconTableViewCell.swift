@@ -89,7 +89,7 @@ make.right.equalTo(self.contentView.snp_right).offset(-screenWidth*0.025)
         
     }
 
-    //MARK: - 懒加载属性
+    //MARK: - 成员变量
     var viewModel : UserAccountViewModel?{
         didSet {
             iconImageView.sd_setImage(with: viewModel?.avatar_largeURL, placeholderImage: UIImage.init(named: "avatar_default"), options: [.retryFailed,.refreshCached], completed: nil)

@@ -78,10 +78,10 @@ class CommentCell: UITableViewCell {
         }
         
         //3.设置控件
-        contentLabel.labelDelegate = self
+        contentLabel.delegate = self
     }
     
-    //MARK: - 懒加载控件
+    //MARK: - 成员变量
     weak var clickLabelDelegate : clickBlueLinkDelegate?
     
     lazy var screenName : UIButton = {
@@ -93,18 +93,17 @@ class CommentCell: UITableViewCell {
     }()
     lazy var iconImageView : UIImageView = UIImageView()
     
-    lazy var contentLabel : FFLabel = FFLabel.init(size: 15, content: "", color: .black, alignment: .left, lines: 0, breakMode: .byTruncatingTail)
+    lazy var contentLabel : HLLabel = HLLabel.init(size: 15, content: "", color: .black, alignment: .left, lines: 0, breakMode: .byTruncatingTail)
     
 }
 
-extension CommentCell : FFLabelDelegate
+extension CommentCell : HLLabelDelegate
 {
-    func labelDidSelectedLinkText(label: FFLabel, text: String)
-    {
-    if text.hasPrefix("http"){
-    //由于我们在微博中点击的链接为短链接(节省资源)，都为httpl开头
-        clickLabelDelegate?.didClickURL(url: URL.init(string: text)!)
-    }
+    func didSelectHighLightedText(label: HLLabel, string: String) {
+        if string.hasPrefix("http"){
+            //由于我们在微博中点击的链接为短链接(节省资源)，都为httpl开头
+            clickLabelDelegate?.didClickURL(url: URL.init(string: string)!)
+        }
     }
 }
 

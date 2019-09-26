@@ -9,22 +9,29 @@
 import UIKit
 import SDWebImage
 class WelcomeViewController: UIViewController {
-    //MARK: -设置控件的值
+    //MARK: - 生命周期
+    override func loadView() {
+        view = backimage
+        setUpUI()
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-//       print(UserAccountViewModel.shared) 
-        
-//        iconview.sd_setImage(with:UserAccountViewModel.shared.avatar_largeURL , placeholderImage: UIImage.init(named: "avatar_default_big"), options:.cacheMemoryOnly , completed: nil)
-        //
         loadIcon()
     }
+   
+    override func viewDidAppear(_ animated: Bool) {
+        
+        startAnimation()
+        
+    }
+    
     ///磁盘加载用户头像
     func loadIcon(){
         //会先去磁盘找到该文件
         //如果没有就重新下载
-    
+        
         SDWebImageManager.shared().loadImage(with: UserAccountViewModel.shared.avatar_largeURL, options: [.refreshCached,.retryFailed], progress: nil) { (image, data, _, _, _, _) in
             guard let image = image else{
                 return
@@ -35,18 +42,7 @@ class WelcomeViewController: UIViewController {
         }
     }
     
-    //MARK: - 设置动画/键盘
-    override func viewDidAppear(_ animated: Bool) {
-        
-        startAnimation()
-        
-    }
-    //MARK: -设置视图结构
-    override func loadView() {
-        view = backimage
-        setUpUI()
-    }
-    
+    //MARK: - 成员变量
     private lazy var backimage = UIImageView(image: UIImage.init(named: "ad_background"))
     
     private lazy var iconview : UIImageView = {

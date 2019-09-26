@@ -96,7 +96,7 @@ class UserHeadView: UIView {
         
     }
     
-    //MARK: - 懒加载控件
+    //MARK: - 成员变量
     //占屏幕高度比例0.377
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView.init()

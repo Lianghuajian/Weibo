@@ -142,7 +142,7 @@ class CommentViewController: UIViewController {
         commentKeyBoardView.delegate = self
         viewAboveTableView.isHidden = true
     }
-    //MARK: - 懒加载控件
+    //MARK: - 成员变量
     lazy var tableView = UITableView()
     
     lazy var bottomView: StatusBottomView = {

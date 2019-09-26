@@ -11,7 +11,34 @@ import QorumLogs
 //MARK: - 撰写控制器
 class ComposeViewController: UIViewController {
     
-    //MARK: - 监听方法
+    //MARK: - 生命周期
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        //选完照片不会再弹出键盘
+        if PicturePickerController.view.frame.height == 0{
+            textview.becomeFirstResponder()
+        }
+        
+    }
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        DispatchQueue.main.async {
+            self.setupUI()
+        }
+        //添加键盘通知
+        NotificationCenter.default.addObserver(self, selector: #selector(composeKeyBoardChanged), name: UIResponder.keyboardWillChangeFrameNotification , object: nil)
+    }
+    
+    deinit
+    {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
     @objc private func clickCancel(){
         
         textview.resignFirstResponder()
@@ -106,37 +133,10 @@ class ComposeViewController: UIViewController {
             }
         }
     }
-    //MARK: - 生命周期
-   
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        
-        //选完照片不会再弹出键盘
-        if PicturePickerController.view.frame.height == 0{
-            textview.becomeFirstResponder()
-        }
-        
-    }
     
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
-        
-        DispatchQueue.main.async {
-            self.setupUI()
-        }
-        //添加键盘通知
-        NotificationCenter.default.addObserver(self, selector: #selector(ComposeKeyBoardChanged), name: UIResponder.keyboardWillChangeFrameNotification , object: nil)
-    }
-    
-    deinit
-    {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-    }
     ///监听键盘
-    @objc func ComposeKeyBoardChanged(notification : NSNotification) {
+    @objc func composeKeyBoardChanged(notification : NSNotification) {
         //print(notification)
         //1,拿到键盘每次完成布局后的高度
         let rect = (notification.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
@@ -154,7 +154,7 @@ class ComposeViewController: UIViewController {
             make.bottom.equalTo(view.snp.bottom).offset(offset)
         }
         //3.动画，键盘改变的时候，键盘会从缩到屏幕下放再上来，这时候toolbar约束跟着改变，就会出现toolbar弹跳的效果（及动画运动曲线过长）
-        UIView.animate(withDuration: duration) {
+            UIView.animate(withDuration: duration) {
             //1,我们在拿到其将要运动到的地方，直接插入一个动画，系统会终止之前的动画，直接运行后面动画的位置
             //2,animateBlock其实是对CAAnimation的封装，改变view的layer
             //3,进行这一步骤后duration没有效果
@@ -164,7 +164,7 @@ class ComposeViewController: UIViewController {
         
     }
     
-    //MARK: - 懒加载控件
+    //MARK: - 成员变量
     ///键盘上面的toolbar
     lazy var toolbar = UIToolbar()
     ///键盘输入的textVview
@@ -192,7 +192,8 @@ class ComposeViewController: UIViewController {
     ///相册
     lazy var PicturePickerController = PicturePickerCollectionViewController()
 }
-//MARK: - 设置界面
+
+//MARK: - 布局界面
 extension ComposeViewController
 {
     ///布局视图
@@ -319,7 +320,7 @@ extension ComposeViewController
         
     }
 }
-//MAKR: -textView的代理方法
+//MAKR: - textView的代理
 extension ComposeViewController : UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView) {
         placeHolderLabel.isHidden = true

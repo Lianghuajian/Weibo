@@ -12,7 +12,7 @@ import SnapKit
 private let NewFeatureCellID = "NewFeatureCellID"
 private let NewFeatureCount = 4
 class NewFeatureCollectionViewController: UICollectionViewController {
-    
+    //MARK: - 生命周期
     init(){
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UIScreen.main.bounds.size
@@ -26,11 +26,9 @@ class NewFeatureCollectionViewController: UICollectionViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("不能使用xib加载")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
         
         // Register cell classes
         self.collectionView!.register(NewFeatureCell.self, forCellWithReuseIdentifier: NewFeatureCellID)
@@ -38,8 +36,7 @@ class NewFeatureCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
     
-    // MARK: UICollectionViewDataSource
-    
+    // MARK: - UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return NewFeatureCount
@@ -55,11 +52,6 @@ class NewFeatureCollectionViewController: UICollectionViewController {
         
         return cell
     }
-    //隐藏状态栏
-    override var prefersStatusBarHidden: Bool
-    {
-        return true
-    }
     
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         //求页数
@@ -74,6 +66,15 @@ class NewFeatureCollectionViewController: UICollectionViewController {
         
         cell.showButtonAnimation()
     }
+    
+    //MARK : - 成员变量
+    //隐藏状态栏
+    override var prefersStatusBarHidden: Bool
+    {
+        return true
+    }
+    
+   
     
 }
 

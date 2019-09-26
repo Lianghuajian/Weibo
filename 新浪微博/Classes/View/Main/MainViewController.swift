@@ -9,28 +9,8 @@
 import UIKit
 
 class MainViewController: UITabBarController {
-    //MARK: - 按钮监听方法
-    ///使用OC消息转发机制
-    @objc private func ClickComposeButton(){
-        
-        let vc : UIViewController!
-        
-        if UserAccountViewModel.shared.userLoginStatus
-        {
-            vc = ComposeViewController()
-        }
-        else
-        {
-            vc = VisitorViewController()
-        }
-        
-        let nav = UINavigationController.init(rootViewController: vc)
-        
-        present(nav, animated: true, completion: nil)
-        
-    }
     
-    //MARK: - 视图生命周期
+    //MARK: - 生命周期
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -51,9 +31,28 @@ class MainViewController: UITabBarController {
         
     }
     
-    //MARK: - 懒加载tabBar中间加号按钮
+    //MARK: - 成员变量
     private lazy var composedButton : UIButton = UIButton.init(image: "tabbar_compose_icon_add", backImage: "tabbar_compose_button")
 
+    @objc private func clickComposeButton(){
+        
+        let vc : UIViewController!
+        
+        if UserAccountViewModel.shared.userLoginStatus
+        {
+            vc = ComposeViewController()
+        }
+        else
+        {
+            vc = VisitorViewController()
+        }
+        
+        let nav = UINavigationController.init(rootViewController: vc)
+        
+        present(nav, animated: true, completion: nil)
+        
+    }
+    
 }
 
 //MARK: - 添加控制器
@@ -68,7 +67,7 @@ extension MainViewController{
         //dx正数，形成中间的view就越小
         composedButton.frame = tabBar.bounds.insetBy(dx: 2*w, dy: 0)
         
-        composedButton.addTarget(self, action: #selector(ClickComposeButton), for: .touchUpInside)
+        composedButton.addTarget(self, action: #selector(clickComposeButton), for: .touchUpInside)
     }
     private func addChilds()  {
         
@@ -83,6 +82,7 @@ extension MainViewController{
         addChild(childController: ProfileViewController(), title: "我", barImage:"tabbar_profile", highLightImage: "tabbar_profile_selected")
         
     }
+    
     private func addChild(childController : UIViewController,title : String?,barImage : String? ,highLightImage : String?) {
         
         guard let title = title,let barImage = barImage, let highLightImage = highLightImage else {

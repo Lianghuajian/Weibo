@@ -28,7 +28,6 @@ class ProfileViewController: VisitorViewController {
     
     
     //MARK: - 生命周期
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -72,29 +71,14 @@ class ProfileViewController: VisitorViewController {
             
         }
         setUpUI()
-        prepareTableView()
+       
     }
     
     func prepareTableView(){
-        self.view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.snp.top)
-            make.bottom.equalTo(self.view.snp.bottom)
-            make.left.equalTo(self.view.snp.left)
-            
-            make.right.equalTo(self.view.snp.right)
-            
-        }
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = spaColor
-        tableView.register(IconTableViewCell.self, forCellReuseIdentifier:IconTableViewCellID)
-        tableView.register(InfoTableViewCell.self, forCellReuseIdentifier:InfoTableViewCellID)
-        tableView.register(DetailTableViewCell.self, forCellReuseIdentifier:DetailTableViewCellID)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: normalCellID)
+       
     }
     
-    //MARK: - 懒加载属性
+    //MARK: - 成员变量
     lazy var tableView : UITableView = UITableView.init()
     lazy var refreshButton : UIButton = {
         let button = UIButton.init(text: "更新用户", textColor: .blue, backImage: nil, isBack: false)
@@ -211,11 +195,28 @@ extension ProfileViewController : UITableViewDelegate,UITableViewDataSource
 //MARK: - 布局视图
 extension ProfileViewController {
     func setUpUI(){
-        //0,控件设置
+     
+        self.view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view.snp.top)
+            make.bottom.equalTo(self.view.snp.bottom)
+            make.left.equalTo(self.view.snp.left)
+            
+            make.right.equalTo(self.view.snp.right)
+            
+        }
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = spaColor
+        tableView.register(IconTableViewCell.self, forCellReuseIdentifier:IconTableViewCellID)
+        tableView.register(InfoTableViewCell.self, forCellReuseIdentifier:InfoTableViewCellID)
+        tableView.register(DetailTableViewCell.self, forCellReuseIdentifier:DetailTableViewCellID)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: normalCellID)
         
-        //3,设置按钮监听
         refreshButton.addTarget(self, action: #selector(refresh) , for: .touchUpInside)
         logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
+        
+        
     }
     
     //MARK: - 按钮监听方法

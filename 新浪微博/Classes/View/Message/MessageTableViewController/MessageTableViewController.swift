@@ -75,7 +75,7 @@ class MessageTableViewController: UIViewController {
         self.view.addSubview(tableView)
     }
    
-    //MARK: - 懒加载属性
+    //MARK: - 成员变量
     lazy var topSearchBar : LHJSearchBar = {
         let sb = LHJSearchBar.init(frame:CGRect.init(x: 0, y: 0, width: screenWidth, height: screenHeight*0.08)
             , placeHolder: "Search", leftImage: nil, showsCancelButton: false, tintColor: .clear)

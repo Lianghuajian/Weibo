@@ -80,7 +80,7 @@ class InfoTableViewCell: UITableViewCell {
         
     }
 
-    //MARK: - 懒加载属性
+    //MARK: - 成员变量
     lazy var weiboCountLabel : UILabel = {
        let label = UILabel.init(size: 16, content: "6", color: UIColor.init(red: 53.0/255.0, green: 53.0/255.0, blue: 53.0/255.0, alpha: 1), alignment: .center, lines: 0, breakMode: .byTruncatingTail)
         return label

@@ -41,10 +41,6 @@ extension NetworkTool
 {
     func loadUserInfo(uid:String,success:@escaping completion)  {
         
-//        guard var params = AFNetworkTool.tokenDict else{
-//            success(nil, NSError(domain:"cn.itcast.error",code:-1001,userInfo:["message":"token 为空"]))
-//            return
-//        }
         var params = [String : Any]()
         
         let urlStrings = "https://api.weibo.com/2/users/show.json"
@@ -71,10 +67,7 @@ extension NetworkTool{
     /// see:
     func postStatus(content : String,image: UIImage?,finished :@escaping completion)
     {
-//        guard var params = AFNetworkTool.tokenDict else{
-//            finished(nil, NSError(domain:"cn.itcast.error",code:-1001,userInfo:["message":"token 为空"]))
-//            return
-//        }
+
         var params = [String : Any]()
         
         params["status"] = content
@@ -145,7 +138,11 @@ extension NetworkTool{
 extension NetworkTool
 {
     ///加载一条微博评论 https://open.weibo.com/wiki/2/comments/show
-    //    id    true    int64    需要查询的微博ID。
+    /// 加载一条微博评论
+    ///
+    /// - Parameters:
+    ///   - id: 微博id
+    ///   - finished: 返回闭包
     func loadComments(statusID id : Int,finished:@escaping completion) {
         
         var params = [String : Any]()
@@ -159,8 +156,12 @@ extension NetworkTool
         
     }
     ///评论一条微博 https://open.weibo.com/wiki/2/comments/create
-//    comment    true    string    评论内容，必须做URLencode，内容不超过140个汉字。
-//    id    true    int64    需要评论的微博ID。
+    /// 评论一条微博
+    ///
+    /// - Parameters:
+    ///   - id: 微博id
+    ///   - comment: 内容
+    ///   - finished: 返回闭包
     func postAComments(statusID id : Int,comment : String,finished:@escaping completion){
         
         let url = "https://api.weibo.com/2/comments/create.json"
@@ -258,23 +259,6 @@ extension NetworkTool{
             
         }
         
-//        成功闭包
-//        let success = { (_ result: URLSessionDataTask?,_ responseobject: Any?) ->Void in
-//            finished(responseobject,nil)
-//        }
-//        //失败闭包
-//        let failture = { (_ result: URLSessionDataTask?,_ error: Error?) ->Void in
-//            finished(nil,error)
-//        }
-//
-//        if RequestMethod == .GET
-//        {
-//            get(URLString, parameters: parameters,progress : progress,success: success, failure: failture)
-//        }
-//        else
-//        {
-//            post(URLString, parameters: parameters, progress: progress, success: success, failure: failture)
-//        }
     }
     
     func upload(URLString : String, data: Data ,name : String, parameters : [ String : Any]? , progress :((Progress)->Void)? , finished : @escaping (completion))
@@ -311,19 +295,6 @@ extension NetworkTool{
             }
             }
         }
-//        post(URLString, parameters: para, constructingBodyWith: { (formData) in
-//            //name服务器定义的字段名字，有点像access_token那种
-//            //filename:http协议定义的属性
-//            //application/octer-stream:告诉服务器这是一个字节流二进制，不知道准确类型
-//            formData.appendPart(withFileData: data, name: name, fileName: "aaa", mimeType: "application/octer-stream")
-//        }, progress: progress, success: { (_, result) in
-//            finished(result,nil)
-//        }) { (_, error) in
-//            print("error")
-//            finished(nil,error)
-//
-//        }
-    
 }
 
 //MARK: - 获取网络状态

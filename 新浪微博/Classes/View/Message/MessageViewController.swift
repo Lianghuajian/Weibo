@@ -85,7 +85,7 @@ class MessageViewController: VisitorViewController {
     func setFirstViewController(){
     self.pageViewController.setViewControllers([controllers[currentIndex]], direction: .forward, animated: true, completion: nil)
     }
-    //MARK: - 懒加载属性
+    //MARK: - 成员变量
     ///pageViewController
     lazy var pageViewController: UIPageViewController = {
         let pgvc = UIPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [UIPageViewController.OptionsKey.interPageSpacing:0])

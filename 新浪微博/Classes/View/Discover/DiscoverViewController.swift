@@ -10,7 +10,7 @@
 import UIKit
 let DiscoverTableViewCellID = "DiscoverTableViewCellID"
 class DiscoverViewController: VisitorViewController {
-
+    //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,7 +51,7 @@ class DiscoverViewController: VisitorViewController {
         player = nil
     }
     
-    // MARK: - 属性
+    //MARK: - 成员变量
     var videoModelList : [VideoModel]?
     
     lazy var tableView = UITableView.init(frame: self.view.bounds, style: .plain)

@@ -29,7 +29,7 @@ class VisitorView: UIView {
         delegate?.ClickLoginButton()
     }
     
-    //MARK: -懒加载控件
+    //MARK: - 成员变量
     private lazy var iconview = UIImageView.init(image: UIImage.init(named: "visitordiscover_feed_image_smallicon"))
     
     private lazy var house = UIImageView.init(image: UIImage.init(named:"visitordiscover_feed_image_house"))
