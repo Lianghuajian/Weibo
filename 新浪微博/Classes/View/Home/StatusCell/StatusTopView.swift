@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-import QorumLogs
 
 protocol ClickTopViewProtocol : NSObjectProtocol {
     func clickClickTopView(statusTopView:StatusTopView)
@@ -23,9 +22,9 @@ class StatusTopView: UIView {
     var viewModel : StatusViewModel?{
         didSet{
             nameLabel.text = viewModel?.status.user?.screen_name
-            //           QL1(viewModel?.status.created_at!)
+            
             sourceLabel.text = viewModel?.source
-            //           QL1("来源：\(viewModel?.source)")
+        
             timeLabel.text = viewModel?.created_at
             iconView.sd_setImage(with: viewModel?.profileURL, placeholderImage: viewModel?.defaultProfile, options: [], completed: nil)
             memberIconView.image = viewModel?.memberImage

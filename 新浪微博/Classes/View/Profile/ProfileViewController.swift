@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import QorumLogs
+
 import SVProgressHUD
 let IconTableViewCellID = "IconTableViewCell"
 let InfoTableViewCellID = "InfoTableViewCell"
@@ -32,7 +32,7 @@ class ProfileViewController: VisitorViewController {
         
         super.viewDidLoad()
         
-        QL1(userAccountViewModel.accountPath)
+        print(userAccountViewModel.accountPath)
         
         if !UserAccountViewModel.shared.userLoginStatus {
             visitorview?.setUpInfo(imagename: "visitordiscover_image_profile", text: "登录后，你的微博，相册，个人资料会显示在这里，展示给别人。")
@@ -227,7 +227,7 @@ extension ProfileViewController {
         }
         UserAccountViewModel.shared.loadUserInfo(uid:uid) { (status) in
             if status{
-                QL1("用户更改信息后刷新数据成功")
+                print("用户更改信息后刷新数据成功")
             }
         }
     }
@@ -240,14 +240,14 @@ extension ProfileViewController {
         do{
             //1,删除用户数据
             try FileManager.default.removeItem(at: UserAccountViewModel.shared.accountPath)
-            QL1("清除用户数据成功")
+            print("清除用户数据成功")
             //2,更新UserAccountViewModel.shared
             UserAccountViewModel.upDateUserAccount()
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: WBSwitchVCControllerNotification), object: nil)
         }catch
         {
-            QL4("清除用户数据失败\(error)")
+            print("清除用户数据失败\(error)")
         }
     }
 }

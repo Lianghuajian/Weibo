@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import QorumLogs
 
 @UIApplicationMain
 
@@ -22,8 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //            catch{ print("删除T_Status失败")}
 //        })
-        QorumLogs.enabled = true
-        
+
         setUpAppearence()
         // Override point for customization after application launch.
         window = UIWindow.init(frame: UIScreen.main.bounds)

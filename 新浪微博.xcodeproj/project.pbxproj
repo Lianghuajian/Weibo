@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		37F93FBCD7A75B1BBFCE2AA4 /* Pods_____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0E9620A00771451CD681F6 /* Pods_____UITests.framework */; };
 		690FD87B22C8A3B600388A6F /* CommentKeyBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690FD87A22C8A3B600388A6F /* CommentKeyBoardView.swift */; };
-		69215C052276DA9C00962D46 /* FFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69215C042276DA9B00962D46 /* FFLabel.swift */; };
 		69215C092276E43C00962D46 /* HomeWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69215C082276E43C00962D46 /* HomeWebViewController.swift */; };
 		6926CA8A23126BB100B39BF2 /* WNPlayerDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C9FF23126BB100B39BF2 /* WNPlayerDecoder.m */; };
 		6926CA8B23126BB100B39BF2 /* WNAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926CA0023126BB100B39BF2 /* WNAudioManager.m */; };
@@ -209,6 +208,8 @@
 		69E59F5A22296D1D00497ECF /* ____Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E59F5922296D1D00497ECF /* ____Tests.swift */; };
 		69E59F6522296D1D00497ECF /* ____UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E59F6422296D1D00497ECF /* ____UITests.swift */; };
 		69E65799227058EE002E2450 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E65798227058EE002E2450 /* Alamofire.framework */; };
+		69EF550B233C424F0029A6E8 /* HJLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EF550A233C424F0029A6E8 /* HJLabel.swift */; };
+		C9F388C432B17737657A1E89 /* Pods_____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFB1ACBB608ACCD47C387A44 /* Pods_____.framework */; };
 		DAD97E374A3C62C11561EA54 /* Pods_____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB0613494533908FF12D2CF /* Pods_____Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -232,7 +233,6 @@
 /* Begin PBXFileReference section */
 		57BE8FF9ACD0C183D4453DB3 /* Pods-新浪微博.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-新浪微博.debug.xcconfig"; path = "Pods/Target Support Files/Pods-新浪微博/Pods-新浪微博.debug.xcconfig"; sourceTree = "<group>"; };
 		690FD87A22C8A3B600388A6F /* CommentKeyBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentKeyBoardView.swift; sourceTree = "<group>"; };
-		69215C042276DA9B00962D46 /* FFLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFLabel.swift; sourceTree = "<group>"; };
 		69215C082276E43C00962D46 /* HomeWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWebViewController.swift; sourceTree = "<group>"; };
 		6926C98223126BB000B39BF2 /* WNPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WNPlayerManager.h; sourceTree = "<group>"; };
 		6926C9FD23126BB100B39BF2 /* WNPlayerDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WNPlayerDecoder.h; sourceTree = "<group>"; };
@@ -709,6 +709,7 @@
 		69E59F6422296D1D00497ECF /* ____UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "____UITests.swift"; sourceTree = "<group>"; };
 		69E59F6622296D1D00497ECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69E65798227058EE002E2450 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69EF550A233C424F0029A6E8 /* HJLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HJLabel.swift; sourceTree = "<group>"; };
 		ABB0613494533908FF12D2CF /* Pods_____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7FB410EDD8C80CAB2324CB8 /* Pods-新浪微博.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-新浪微博.release.xcconfig"; path = "Pods/Target Support Files/Pods-新浪微博/Pods-新浪微博.release.xcconfig"; sourceTree = "<group>"; };
 		BC56D22369D0824BEE545505 /* Pods-新浪微博Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-新浪微博Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-新浪微博Tests/Pods-新浪微博Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -751,6 +752,7 @@
 				696370B52237B61E00DBAC0C /* SnapKit.framework in Frameworks */,
 				6938E006231A3FAE0092ED67 /* libavfilter.a in Frameworks */,
 				6926CAA123126BB100B39BF2 /* libcrypto-tvOS.a in Frameworks */,
+				C9F388C432B17737657A1E89 /* Pods_____.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,14 +814,6 @@
 				690FD87A22C8A3B600388A6F /* CommentKeyBoardView.swift */,
 			);
 			path = CommentKeyBoardView;
-			sourceTree = "<group>";
-		};
-		69215C032276DA9B00962D46 /* FFLabel */ = {
-			isa = PBXGroup;
-			children = (
-				69215C042276DA9B00962D46 /* FFLabel.swift */,
-			);
-			path = FFLabel;
 			sourceTree = "<group>";
 		};
 		6926C98023126BB000B39BF2 /* WMPlayer */ = {
@@ -1111,7 +1105,7 @@
 		692C173C2272E58A00438774 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				69215C032276DA9B00962D46 /* FFLabel */,
+				69EF550A233C424F0029A6E8 /* HJLabel.swift */,
 				69365E3F226CBF1300E6E53E /* fmdb */,
 			);
 			path = lib;
@@ -2248,7 +2242,6 @@
 				69215C092276E43C00962D46 /* HomeWebViewController.swift in Sources */,
 				692EF4AD22D4667F008A2F81 /* CommentModel.swift in Sources */,
 				6926CA8B23126BB100B39BF2 /* WNAudioManager.m in Sources */,
-				69215C052276DA9C00962D46 /* FFLabel.swift in Sources */,
 				6962709522B6260A00E9B8D5 /* MessageTableViewCellTypeOne.swift in Sources */,
 				6926CA9C23126BB100B39BF2 /* WNPlayerModel.m in Sources */,
 				69396A7A2248F3930005E981 /* StatusCell.swift in Sources */,
@@ -2324,6 +2317,7 @@
 				69365E57226D41E600E6E53E /* FMDatabaseQueue.m in Sources */,
 				692C784922D89E8500F81637 /* JXCategoryTitleCellModel.m in Sources */,
 				692C783922D89E8500F81637 /* JXCategoryIndicatorTriangleView.m in Sources */,
+				69EF550B233C424F0029A6E8 /* HJLabel.swift in Sources */,
 				69E3668723142321003933D3 /* DiscoverCellDescriptionView.swift in Sources */,
 				6926CAA623126BB100B39BF2 /* FastForwardView.m in Sources */,
 				6952C5D92260FF0C00A8DC97 /* PhotoBrowserViewController.swift in Sources */,

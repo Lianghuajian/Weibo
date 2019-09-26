@@ -37,6 +37,7 @@ class StatusDAL {
     ///数据加载(本地->网络)
     class func loadStatus(since_id: Int, max_id: Int,finished:@escaping (([[String:Any]]?)->Void)){
         var array : [[String : Any]]!
+        
         // 0,判断是否有网络
         if !NetworkTool.hasNetwork()
         {
@@ -96,7 +97,7 @@ class StatusDAL {
         
         //print("查询sql是 ->"+sql)
         //获取查询后的数据集
-        guard let array = FMDBManager.shared.SearchRecord(sql: sql) , array.count > 0 else{
+        guard let array = FMDBManager.shared.searchRecord(sql: sql) , array.count > 0 else{
             return nil
         }
         var result = [[String:Any]]()

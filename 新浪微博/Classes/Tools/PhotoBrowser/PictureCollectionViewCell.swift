@@ -9,7 +9,6 @@
 import UIKit
 import SDWebImage
 import SVProgressHUD
-import QorumLogs
 //MARK: - 点击图片代理
 protocol TouchPictureDelegate : NSObjectProtocol {
     func touchPicture()
@@ -17,82 +16,22 @@ protocol TouchPictureDelegate : NSObjectProtocol {
 }
 
 class PictureCollectionViewCell: UICollectionViewCell {
-  
-    weak var pictureDelegate : TouchPictureDelegate?
     
-    //MARK: - 图片点击事件
-    @objc func touchImage() {
-        pictureDelegate?.touchPicture()
+    //MARK: - 生命周期
+    override init(frame: CGRect) {
+        
+        super.init(frame: frame)
+        
+        setupUI()
     }
     
-    //MARK: - 数据
-    var pictrueurl : URL?
-    {
-        didSet{
-            //0,恢复scrollView()
-            resetScrollView()
-            //1,加载缩略图地址
-            let tmpimage =  SDWebImageManager.shared().imageCache?.imageFromDiskCache(forKey: pictrueurl?.absoluteString)
-           
-            //imageview.sizeToFit()
-            //imageview.center = scorllview.center
-            setPlaceHolder(image: tmpimage)
-            //2,加载大图
-            let bigurl = bmiddle(urlStirng: pictrueurl!.absoluteString)
-            //大多数第三方的progress闭包都是异步执行
-            //他们回调次数太多，如果太多ui涉及progress同步会造成主线程卡顿
-            //大多数是添加个菊花让用户等待
-            if bigurl.absoluteString.contains("gif")
-            {
-                 QL2(bigurl)
-            }
-        
-            self.imageview.sd_setImage(with: bigurl, placeholderImage: tmpimage, options: [SDWebImageOptions.refreshCached,SDWebImageOptions.retryFailed], progress: { (current, total, _) in
-                
-                DispatchQueue.main.async {
-                    self.placeholderImageView.progress = CGFloat(current)/CGFloat(total)
-                }
-               
-            }) { (image, _, _, _) in
-                if image == nil{
-                    SVProgressHUD.showInfo(withStatus: "图像加载失败")
-                    return
-                }
-                self.placeholderImageView.isHidden = true
-                self.setPosition(image: image!)
-            }
-//            self.imageview.sd_setImage(with: bigurl, placeholderImage: nil, options: []){ image,_,_,_ in
-//
-//                self.setPosition(image: self.imageview.image!)
-//            }
-//            }else {
-//
-//                self.imageview = FLAnimatedImageView.init(frame: self.imageview.frame)
-//                //2,加载大图
-//                let bigurl = bmiddle(urlStirng: pictrueurl!.absoluteString)
-//                //大多数第三方的progress闭包都是异步执行
-//                //他们回调次数太多，如果太多ui涉及progress同步会造成主线程卡顿
-//                //大多数是添加个菊花让用户等待
-//                self.imageview.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchImage)))
-//
-//                self.imageview.isUserInteractionEnabled = true
-//                self.imageview.sd_setImage(with: bigurl, placeholderImage: tmpimage, options: [SDWebImageOptions.refreshCached,SDWebImageOptions.retryFailed], progress: { (current, total, _) in
-//
-//                    DispatchQueue.main.async {
-//                        self.placeholderImageView.progress = CGFloat(current)/CGFloat(total)
-//                    }
-//
-//                }) { (image, _, _, _) in
-//                    if image == nil{
-//                        SVProgressHUD.showInfo(withStatus: "图像加载失败")
-//                        return
-//                    }
-//
-//                    self.placeholderImageView.isHidden = true
-//                    self.setPosition(image: image!)
-//                }
-//            }
-        }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("PictureCollectionView初始化错误，不能使用xib去加载")
+    }
+   
+    //MARK: - 功能函数
+    @objc func touchImage() {
+        pictureDelegate?.touchPicture()
     }
     
     func setPlaceHolder(image:UIImage?)  {
@@ -151,25 +90,47 @@ class PictureCollectionViewCell: UICollectionViewCell {
         //动图不动 则返回下面语句
         return URL(string: string)!
         
-//        return URL(string: "http://photocdn.sohu.com/20150721/mp23627612_1437451852870_2.gif")!
     }
-    
-    //MARK: - 生命周期函数
-    override init(frame: CGRect) {
-        
-        super.init(frame: frame)
-   
-        setupUI()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("PictureCollectionView初始化错误，不能使用xib去加载")
+  
+    var pictrueurl : URL?
+    {
+        didSet{
+            //0,恢复scrollView()
+            resetScrollView()
+            //1,加载缩略图地址
+            let tmpimage =  SDWebImageManager.shared().imageCache?.imageFromDiskCache(forKey: pictrueurl?.absoluteString)
+            
+            //imageview.sizeToFit()
+            //imageview.center = scorllview.center
+            setPlaceHolder(image: tmpimage)
+            //2,加载大图
+            let bigurl = bmiddle(urlStirng: pictrueurl!.absoluteString)
+            //大多数第三方的progress闭包都是异步执行
+            //他们回调次数太多，如果太多ui涉及progress同步会造成主线程卡顿
+            //大多数是添加个菊花让用户等待
+            
+            self.imageview.sd_setImage(with: bigurl, placeholderImage: tmpimage, options: [SDWebImageOptions.refreshCached,SDWebImageOptions.retryFailed], progress: { (current, total, _) in
+                
+                DispatchQueue.main.async {
+                    self.placeholderImageView.progress = CGFloat(current)/CGFloat(total)
+                }
+                
+            }) { (image, _, _, _) in
+                if image == nil{
+                    SVProgressHUD.showInfo(withStatus: "图像加载失败")
+                    return
+                }
+                self.placeholderImageView.isHidden = true
+                self.setPosition(image: image!)
+            }
+        }
     }
     
     //MARK: - 成员变量
     lazy var scrollview = UIScrollView()
     lazy var imageview = FLAnimatedImageView()
     lazy var placeholderImageView = ProgressImageView()
+    weak var pictureDelegate : TouchPictureDelegate?
     
 }
 

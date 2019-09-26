@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import QorumLogs
+
 /*
  *MVVM
  *UserAccountViewModel:
@@ -47,13 +47,11 @@ class UserAccountViewModel {
     }
     
     private var isExpired : Bool{
-//        print("\(account?.expiresDate) + \(Date())")
+        
         return account?.expiresDate?.compare(Date()) == .orderedDescending ? false : true
     }
     
     private init() {
-        
-        //print(accountPath.absoluteString)
         
         do {
 
@@ -86,7 +84,7 @@ class UserAccountViewModel {
     }
 }
 
-//MARK: -封装网络请求
+//MARK: - 网络请求
 extension UserAccountViewModel {
     
     /// 用户登陆请求
@@ -127,11 +125,11 @@ extension UserAccountViewModel {
                 finished(false)
                 return
             }
-            QL1(dict["location"])
+            print(dict["location"])
            
             if  dict.keys.contains("error") && (dict["error"] as! String) == "User requests out of rate limit!"
             {
-                QL4("超出一天最大请求次数")
+                print("超出一天最大请求次数")
             }
             account.screen_name = dict["screen_name"] as? String
             account.avatar_large = dict["avatar_large"] as? String

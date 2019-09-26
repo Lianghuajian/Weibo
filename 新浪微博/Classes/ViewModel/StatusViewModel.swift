@@ -88,6 +88,8 @@ class StatusViewModel: NSObject {
         return status.retweeted_status != nil ? RetweetedStatusCellID : OriginStatusCellID
     }
     
+    var indexPath : IndexPath?
+    
     //缓存行高
     lazy var rowHeight : CGFloat = {
         //print("计算了rowHeight")

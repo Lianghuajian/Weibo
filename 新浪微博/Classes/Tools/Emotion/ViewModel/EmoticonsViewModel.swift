@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import QorumLogs
+
 class EmoticonsViewModel {
     ///单例
     static var shared = EmoticonsViewModel()

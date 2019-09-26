@@ -22,7 +22,6 @@ class FMDBManager: NSObject {
         var path = URL.init(string: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!)
         
         path?.appendPathComponent(tableName)
-//        print(path?.absoluteString)
         //如果不存在该数据库，队列会帮我们创建一个。
         DBqueue = FMDatabaseQueue.init(path: path!.absoluteString)
         
@@ -46,7 +45,7 @@ class FMDBManager: NSObject {
         
     }
     //MARK: - 查询数据
-    func SearchRecord(sql : String) -> [[String : Any]]? {
+    func searchRecord(sql : String) -> [[String : Any]]? {
         //let sql = "SELECT id , name , age , height FROM T_Person;"
         var array : [[String : Any]]? = [[String : Any]]()
         //由于该线程是同步线程，不需要返回闭包

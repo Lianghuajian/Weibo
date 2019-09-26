@@ -1,3 +1,4 @@
 WMPlayer filter=lfs diff=lfs merge=lfs -text
 *.h linguist-language=swift
 *.m linguist-language=swift
+//

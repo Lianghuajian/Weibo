@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import QorumLogs
+
 protocol StatusBottomViewClickDelegate : NSObjectProtocol {
     func commentButtonClick(pointToWindows:CGPoint)
     func retweetButtonClick(pointToWindows:CGPoint)

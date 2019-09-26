@@ -8,7 +8,7 @@
 
 import UIKit
 import SDWebImage
-import QorumLogs
+
 let pictureMargins : CGFloat = 6
 let CollectionViewCellID = "CollectionViewCellID"
 

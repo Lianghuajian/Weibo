@@ -35,15 +35,14 @@ extension StatusListViewModel{
                 return
             }
             
-            
             let decoder = JSONDecoder()
             //2,Json -> StatusViewModel
             let list = statuses.compactMap({ (jsonDict) -> StatusViewModel? in
                 //先把每个statusJson字典转化成Data类型
                 //通过data去写模型
-                 do {
+                do {
                     let d = try JSONSerialization.data(withJSONObject:
-                    jsonDict, options: [])
+                        jsonDict, options: [])
                     //Json -> StatusModel
                     let status = try decoder.decode(Status.self, from: d)
                     return StatusViewModel.init(status: status)
@@ -68,8 +67,8 @@ extension StatusListViewModel{
             //print("刷新了\(List.count)条微博 ，总微博为\(self.StatusList.count)")
             //4,我们要保证finish闭包要在缓存完单图后
             self.cacheSinglePic(StatusList: list,finished: finished)
-        //注意：如果不再缓存结束再去调用finish闭包，这边单图的cell会出现布局错误，比如我原本的图片长度是100，这时候调用reloadData，大小被确认下来了，这时候我再剪切图片成60，由于自动布局，bottomView也跟着上去.
-        //比如图片高度是90，然后我们在单图缓存完后调用图片size调整函数，我们默认的size是120，在磁盘中找到该图片时候再去更新size，如果没找到就120，这时候就会产生30的高度差。
+            //注意：如果不再缓存结束再去调用finish闭包，这边单图的cell会出现布局错误，比如我原本的图片长度是100，这时候调用reloadData，大小被确认下来了，这时候我再剪切图片成60，由于自动布局，bottomView也跟着上去.
+            //比如图片高度是90，然后我们在单图缓存完后调用图片size调整函数，我们默认的size是120，在磁盘中找到该图片时候再去更新size，如果没找到就120，这时候就会产生30的高度差。
             
         }
     }
@@ -102,33 +101,29 @@ extension StatusListViewModel{
     
 }
 
-//MARK: -单图缓存
+//MARK: - 单图缓存
 extension StatusListViewModel{
-    
     /// 单图缓存
-    /// 目的：把单图提前缓存起来，得到其单图的比例
+    /// 目的：把单图提前缓存起来，方便后面计算高度直接命中内存
     /// - Parameter StatusList: 用户微博模型列表
     func cacheSinglePic(StatusList : [StatusViewModel],finished:@escaping (_ isSuccess : Bool) -> Void){
         //计算总单图的长度
         var dataLength = 0
         //建立单图缓存组，使用组保证了图片一次性缓存（同步任务的完成），缓存结束后再去进行布局
-        let group = DispatchGroup.init()
+        let group = DispatchGroup()
         
-        //print("开始缓存")
+        
         for status in StatusList {
             //拿到单张图片的微博，否则继续往下寻找
             if status.thumbnails?.count != 1
             {
                 continue
             }
-            //进组
-            group.enter()
-            //        print("开始缓存单图 : \($0.thumbnails![0].absoluteString)")
             //缓存
             //注意：
- //设置了retryFailed，当请求失败会重新执行该闭包内容，如果里面有某些信号量的处理，可能会引起越界，如group.leave()
-//设置了refreshCached，sdWeb请求服务器下载图片的时候会把缓存图片的hash值发送给服务器做图片校验，如果一样服务器返回304，否则重新执行该闭包下载，也会引起信号量的处理
-            //[SDWebImageOptions.refreshCached,SDWebImageOptions.retryFailed]
+            //设置了retryFailed，当请求失败会重新执行该闭包内容，如果里面有某些信号量的处理，可能会引起越界，如group.leave()
+            //设置了refreshCached，sdWeb请求服务器下载图片的时候会把缓存图片的hash值发送给服务器做图片校验，如果一样服务器返回304，否则重新执行该闭包下载，也会引起信号量的处理
+            group.enter()
             SDWebImageManager.shared().loadImage(with: status.thumbnails![0],
                                                  options: [],
                                                  progress:nil,
@@ -142,12 +137,10 @@ extension StatusListViewModel{
             })
         }
         
-        
         group.notify(queue: DispatchQueue.main) {
-            //print("缓存完成")
+            
             print("加载的微博中单图数据长度\(dataLength/1024)")
             //print("缓存图像的地址:\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!)")
-            
             finished(true)
         }
     }

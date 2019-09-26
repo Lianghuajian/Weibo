@@ -93,13 +93,13 @@ class CommentCell: UITableViewCell {
     }()
     lazy var iconImageView : UIImageView = UIImageView()
     
-    lazy var contentLabel : HLLabel = HLLabel.init(size: 15, content: "", color: .black, alignment: .left, lines: 0, breakMode: .byTruncatingTail)
+    lazy var contentLabel : HJLabel = HJLabel.init(size: 15, content: "", color: .black, alignment: .left, lines: 0, breakMode: .byTruncatingTail)
     
 }
 
 extension CommentCell : HLLabelDelegate
 {
-    func didSelectHighLightedText(label: HLLabel, string: String) {
+    func didSelectHighLightedText(label: HJLabel, string: String) {
         if string.hasPrefix("http"){
             //由于我们在微博中点击的链接为短链接(节省资源)，都为httpl开头
             clickLabelDelegate?.didClickURL(url: URL.init(string: string)!)

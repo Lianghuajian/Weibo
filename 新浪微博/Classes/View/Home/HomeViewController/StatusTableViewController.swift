@@ -8,7 +8,6 @@
 
 import UIKit
 import SVProgressHUD
-import QorumLogs
 
 let OriginStatusCellID = "OriginStatusCellID"
 let RetweetedStatusCellID = "RetweetedStatusCellID"
@@ -196,7 +195,7 @@ class StatusTableViewController: VisitorViewController {
         guard let refreshCount = statusListViewModel.pullDownStatusCount else {
             return
         }
-        //QL1("刷新到\(refreshCount)条数据")
+        
         self.refreshStatusLabel.text = refreshCount != 0 ? "刷新到\(refreshCount)条数据" : "没有刷新到数据"
         //我们来改变他的y轴距离去让他显示
         let labelY : CGFloat = 44
@@ -210,7 +209,7 @@ class StatusTableViewController: VisitorViewController {
         //我们在这里添加label在navibar上面还是下面
         UIView.animate(withDuration: 1.5, animations: {
             self.refreshStatusLabel.frame = rect.offsetBy(dx: 0, dy: labelY)
-            //            self.refreshControl?.endRefreshing()
+            
         }, completion: { _ in
             //让动画保持一秒
             DispatchQueue.main.asyncAfter(deadline: .now()
@@ -326,12 +325,7 @@ class StatusTableViewController: VisitorViewController {
     }()
     
     class BackGroundView: UIView,UIGestureRecognizerDelegate {
-        //        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //            QL1("---")
-        //        }
-        //        override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //           QL1("---")
-        //        }
+       
         override init(frame: CGRect) {
             super.init(frame: frame)
         }
@@ -403,7 +397,7 @@ extension StatusTableViewController : UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //QL1("调用了numberOfRowsInSection")
+        
         return statusListViewModel.statusList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -428,7 +422,7 @@ extension StatusTableViewController : UITableViewDelegate,UITableViewDataSource
         //            self.tableView.mj_footer
         //        }
         
-        //QL1("调用了cellForRowAt")
+
         return cell
     }
     
@@ -448,13 +442,7 @@ extension StatusTableViewController : UITableViewDelegate,UITableViewDataSource
     //苹果建议：如果设置了TableView.rowHeight 就不要使用下面方法，两者互斥。
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //print("计算了rowHeight----第\(indexPath.row)行")
-        //        QL1("调用了行高计算")
-        //        if cell != nil && (cell as! StatusCell).bottomView.frame.maxY != statuslistviewModel.StatusList[indexPath.row].rowHeight
-        //        {
-        //            statuslistviewModel.StatusList[indexPath.row].rowHeight = (cell as! StatusCell).bottomView.frame.maxY
-        //        }
-        
+    
         return statusListViewModel.statusList[indexPath.row].rowHeight
         
     }
