@@ -34,25 +34,8 @@ class MessageTableViewController: UIViewController {
         }
     }
     func prepareSearchBar() {
-//        topSearchBar.frame = CGRect.init(x: 0, y: 0, width: screenWidth, height: 44)
         
         topSearchBar.delegate = self
-//        topSearchBar.showsCancelButton
-//        topSearchBar.value(forKeyPath: "cancelButton")
-//        let button : UIButton = topSearchBar.value(forKey:"cancelButton") as! UIButton
-//
-//        button.setTitle("cancel", for: .normal)
-//
-//        topSearchBar.setValue(button, forKey: "cancelButton")
-        
-        //        var count : UInt32 = 0
-        //        let propertylist = class_copyPropertyList(UISearchBar.self, &count)
-//        for i in 0..<count {
-//            let char_b = property_getName(propertylist![Int(i)])
-//            if let key = String.init(cString: char_b, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) as String?{
-//                               print(key)
-//                }
-//        }
         
     }
     func prepareTableView(){
@@ -62,7 +45,7 @@ class MessageTableViewController: UIViewController {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.always
         //把多余的cell去掉
         self.tableView.tableHeaderView = topSearchBar
-  
+//        topSearchBar.set = SearchViewController()
         self.tableView.estimatedSectionFooterHeight = 0
 
         self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: screenWidth, height: 46))
@@ -76,10 +59,12 @@ class MessageTableViewController: UIViewController {
     }
    
     //MARK: - 成员变量
-    lazy var topSearchBar : LHJSearchBar = {
-        let sb = LHJSearchBar.init(frame:CGRect.init(x: 0, y: 0, width: screenWidth, height: screenHeight*0.08)
-            , placeHolder: "Search", leftImage: nil, showsCancelButton: false, tintColor: .clear)
+    lazy var topSearchBar : UISearchBar = {
+        
+        let sb = UISearchBar.init(frame:CGRect.init(x: 0, y: 0, width: screenWidth, height: screenHeight*0.08))
+        sb.placeholder = "search"
         sb.backgroundColor = backColor
+            
         return sb
     }()
     
@@ -87,9 +72,7 @@ class MessageTableViewController: UIViewController {
     
     lazy var placeHolderView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: screenWidth, height: screenHeight))
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        cancelEditingSearchBar(topSearchBar)
-    }
+  
 }
 
 extension MessageTableViewController :UITableViewDataSource,UITableViewDelegate
@@ -117,49 +100,14 @@ extension MessageTableViewController : UISearchBarDelegate
 {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         
-        let vc = SearchBarViewController()
-        vc.modalTransitionStyle = .crossDissolve
+        let svc = SearchViewController()
         
-        self.present(vc, animated: true) {
+        self.present(svc, animated: true, completion: {
             
-        }
-        vc.searchBar.becomeFirstResponder()
-        //我们这里返回false，使用另一个viewController去处理查询，这样就不会弹出键盘了
-        return false
+        })
+        
+        return true
     }
-//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//    // 设置取消按钮
-//    UIView.animate(withDuration: 0.4) {
-//        searchBar.showsCancelButton = true
-//
-//        for v in searchBar.subviews {
-//
-//            for _v in v.subviews {
-//
-//                if let _cls = NSClassFromString("UINavigationButton") {
-//
-//                    if _v.isKind(of: _cls) {
-//                        guard let btn = _v as? UIButton else { return }
-//
-//                        btn.setTitle("取消", for: .normal)
-//                        btn.setTitleColor(UIColor.white, for: .normal)
-//                        return
-//                    }
-//                }
-//
-//            }
-//
-//        }
-//    }
-//    }
-    
-    
-    fileprivate func cancelEditingSearchBar(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        searchBar.showsCancelButton = false
 
-    }
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-     cancelEditingSearchBar(searchBar)
-    }
+    
 }

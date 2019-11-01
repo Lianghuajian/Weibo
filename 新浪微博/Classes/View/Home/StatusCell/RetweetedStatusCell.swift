@@ -40,7 +40,7 @@ class RetweetedStatusCell: StatusCell {
     }()
 
     ///转发微博的文字
-    lazy var retweetlabel : HJLabel = HJLabel.init(content: "",
+    lazy var retweetlabel : HLLabel = HLLabel.init(content: "",
                                                    color: .black,
                                                    size: screenHeight*0.0243,
                                                    screenInset: StatusCellMargins)

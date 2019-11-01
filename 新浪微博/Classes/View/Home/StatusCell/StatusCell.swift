@@ -70,7 +70,7 @@ class StatusCell: UITableViewCell {
     
     lazy var pictureView = StatusPictureView()
 
-    lazy var contentLabel : HJLabel = HJLabel.init(content: "微博正文",color: .black, size:  screenHeight*0.0246, screenInset:StatusCellMargins)
+    lazy var contentLabel : HLLabel = HLLabel.init(content: "微博正文",color: .black, size:  screenHeight*0.0246, screenInset:StatusCellMargins)
     
     weak var clickLabelDelegate : ClickLabelDelegate?
     
@@ -104,11 +104,12 @@ extension StatusCell{
         }
         
         bottomView.snp.makeConstraints { (make) in
-    make.top.equalTo(pictureView.snp.bottom).offset(StatusCellMargins)
+            make.top.equalTo(pictureView.snp.bottom).offset(StatusCellMargins)
             make.left.equalTo(contentView.snp.left)
             make.right.equalTo(contentView.snp.right)
             make.height.equalTo(CellIconWidth)
         }
+
         //3，设置代理
         contentLabel.delegate = self
         bottomView.delegate = self
@@ -133,7 +134,9 @@ extension StatusCell : StatusBottomViewClickDelegate
     
 }
 extension StatusCell : HLLabelDelegate{
-    func didSelectHighLightedText(label: HJLabel, string: String) {
+    
+    func didSelectHighLightedText(label: HLLabel, string: String) {
+        
         if string.hasPrefix("http"){
             //由于我们在微博中点击的链接为短链接(节省资源)，都为httpl开头
             clickLabelDelegate?.didClickURL(url: URL.init(string: string)!)

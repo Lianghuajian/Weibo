@@ -8,7 +8,7 @@
 
 import UIKit
 //我们做了桥接，框架已经内嵌与swift，可以直接在任何文件中使用
-//import FMDB
+
 let tableName = "status.db"
 
 class FMDBManager: NSObject {
@@ -18,8 +18,10 @@ class FMDBManager: NSObject {
     var DBqueue : FMDatabaseQueue?
     //MARK: - 打开数据库
     private override init(){
+        
         super.init()
-        var path = URL.init(string: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!)
+        
+        var path = URL(string: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!)
         
         path?.appendPathComponent(tableName)
         //如果不存在该数据库，队列会帮我们创建一个。

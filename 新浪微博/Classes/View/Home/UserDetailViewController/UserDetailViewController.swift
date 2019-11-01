@@ -8,10 +8,10 @@
 
 import UIKit
 
-private let margin = 10
-//用于判断导航条的隐藏与否
-let kNavBarBottom = WRNavigationBar.navBarBottom()
-private let NAVBAR_COLORCHANGE_POINT:CGFloat = screenHeight*0.377 - CGFloat(kNavBarBottom * 2)
+//private let margin = 10
+////用于判断导航条的隐藏与否
+//let kNavBarBottom = WRNavigationBar.navBarBottom()
+//private let NAVBAR_COLORCHANGE_POINT:CGFloat = screenHeight*0.377 - CGFloat(kNavBarBottom * 2)
 
 class UserDetailViewController: UIViewController {
    
@@ -60,7 +60,7 @@ class UserDetailViewController: UIViewController {
 
     func prepareNavigationBar()
     {
-//        self.automaticallyAdjustsScrollViewInsets = false
+        self.automaticallyAdjustsScrollViewInsets = false
         pagingView.mainTableView.contentInsetAdjustmentBehavior = .never
         let topSafeMargin = UIApplication.shared.keyWindow!.jx_layoutInsets().top
         let naviHeight = UIApplication.shared.keyWindow!.jx_navigationHeight()
@@ -69,13 +69,13 @@ class UserDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "··· ", style: .done, target: nil, action: nil)
         
         // 设置导航栏颜色
-        navBarBarTintColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
-        
-        // 设置初始导航栏透明度
-        navBarBackgroundAlpha = 0
-        
-        // 设置导航栏按钮和标题颜色
-        navBarTintColor = .white
+//        navBarBarTintColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
+//
+//        // 设置初始导航栏透明度
+//        navBarBackgroundAlpha = 0
+//
+//        // 设置导航栏按钮和标题颜色
+//        navBarTintColor = .white
         
     }
     
@@ -211,22 +211,22 @@ extension UserDetailViewController: JXPagingMainTableViewGestureDelegate {
     func mainTableViewDidScroll(_ scrollView: UIScrollView) {
 
         let offsetY = scrollView.contentOffset.y
-        if (offsetY > NAVBAR_COLORCHANGE_POINT)
-        {
-            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navBarBackgroundAlpha = alpha
-            navBarTintColor = UIColor.black.withAlphaComponent(alpha)
-            navBarTitleColor = UIColor.black.withAlphaComponent(alpha)
-            statusBarStyle = .default
-            title = statusViewModel?.user?.screen_name
-        }
-        else
-        {
-            navBarBackgroundAlpha = 0
-            navBarTintColor = .white
-            navBarTitleColor = .white
-            statusBarStyle = .lightContent
-            title = ""
-        }
+//        if (offsetY > NAVBAR_COLORCHANGE_POINT)
+//        {
+//            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
+//            navBarBackgroundAlpha = alpha
+//            navBarTintColor = UIColor.black.withAlphaComponent(alpha)
+//            navBarTitleColor = UIColor.black.withAlphaComponent(alpha)
+//            statusBarStyle = .default
+//            title = statusViewModel?.user?.screen_name
+//        }
+//        else
+//        {
+//            navBarBackgroundAlpha = 0
+//            navBarTintColor = .white
+//            navBarTitleColor = .white
+//            statusBarStyle = .lightContent
+//            title = ""
+//        }
    }
 }

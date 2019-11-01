@@ -57,6 +57,7 @@ class MainViewController: UITabBarController {
 
 //MARK: - 添加控制器
 extension MainViewController{
+    
     private func addComposedButton(){
         
         self.tabBar.addSubview(composedButton)

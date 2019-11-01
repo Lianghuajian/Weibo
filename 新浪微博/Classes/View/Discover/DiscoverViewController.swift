@@ -199,9 +199,13 @@ extension DiscoverViewController : WMPlayerDelegate
         let vc = VideoViewController()
         vc.playerModel = wmplayer.playerModel
         vc.player = wmplayer
-        vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
-        releasePlayer()
+        
+            vc.hidesBottomBarWhenPushed = true
+        
+            self.navigationController?.pushViewController(vc, animated: true)
+        
+            releasePlayer()
+            
         }else
         {
             setNeedsStatusBarAppearanceUpdate()

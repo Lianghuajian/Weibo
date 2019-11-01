@@ -29,4 +29,17 @@ extension Int
         }
         return s
     }
+    
+    var abs : Int
+    {
+        return self < 0 ? self * -1 : self
+    }
+}
+
+extension CGFloat
+{
+    var abs : CGFloat
+       {
+        return self < 0 ? self * -1 : self
+       }
 }

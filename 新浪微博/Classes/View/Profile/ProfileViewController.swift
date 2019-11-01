@@ -32,6 +32,8 @@ class ProfileViewController: VisitorViewController {
         
         super.viewDidLoad()
         
+        self.view.backgroundColor = .black
+        
         print(userAccountViewModel.accountPath)
         
         if !UserAccountViewModel.shared.userLoginStatus {
@@ -119,7 +121,7 @@ extension ProfileViewController : UITableViewDelegate,UITableViewDataSource
         case 1:
             return screenHeight*0.093
         case 2:
-            return screenHeight*0.310
+            return screenWidth * 0.5 + screenHeight*0.017 // 加上条
         default :
             return 44+spaHeight
         }

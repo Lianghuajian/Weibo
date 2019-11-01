@@ -25,6 +25,7 @@ class CommentViewController: UIViewController {
             commentKeyBoardView.statusViewModel = statusViewModel
         }
     }
+    
     var commentListViewModel = CommentListViewModel()
     
     //MARK: - 生命周期
@@ -37,10 +38,13 @@ class CommentViewController: UIViewController {
         prepareStatusBottomView()
         prepareTableView()
         prepareCommentKeyBoard()
+        
         statusViewModel?.loadComments({[weak self] (viewModels) in
             guard let viewModels = viewModels else
             {
+                
                 return
+                
             }
             self?.commentListViewModel.viewModels = viewModels
             DispatchQueue.main.async {
@@ -74,18 +78,22 @@ class CommentViewController: UIViewController {
         tableView.register(RetweetedStatusCell.self, forCellReuseIdentifier:CellID.RetweetedStatusCellID.rawValue)
         tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: refreshCommentTableView)
         (tableView.mj_header as? MJRefreshStateHeader)?.lastUpdatedTimeLabel.isHidden = true
-//        tableView.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: loadStatus)
+
     }
     
     @objc func refreshCommentTableView()
     {
         
         self.statusViewModel?.loadComments({[weak self] (viewModels) in
+            
             guard let viewModels = viewModels else
             {
+                self?.tableView.mj_header.endRefreshing()
                 return 
             }
+            
             self?.commentListViewModel.viewModels = viewModels
+            
             self?.tableView.mj_header.endRefreshing()
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
@@ -139,6 +147,11 @@ class CommentViewController: UIViewController {
         }
         
         
+        emoticonLayer.backgroundColor = UIColor.clear.cgColor
+        
+        self.view.layer.addSublayer(emoticonLayer)
+        
+        
         commentKeyBoardView.delegate = self
         viewAboveTableView.isHidden = true
     }
@@ -150,6 +163,8 @@ class CommentViewController: UIViewController {
         
         return sbv
     }()
+    
+    let emoticonLayer = EmoticonLayer()
     
     lazy var commentKeyBoardView = CommentKeyBoardView()
     ///评论View的位置
@@ -188,6 +203,7 @@ class CommentViewController: UIViewController {
         //第一次打开键盘输入字母会再次进入这个方法，即使rect没有改变
         if rect != lastKeyBoardRect
         {
+            
             lastKeyBoardRect = rect
             
 //            var contentOffset : CGPoint!
@@ -298,6 +314,8 @@ extension CommentViewController : CommentKeyBoardViewDelegate
 {
     func didClickSend(commentKeyBoardView: CommentKeyBoardView, content: String) {
     
+    emoticonLayer.emit(text: "微笑")
+        
     NetworkTool.shared.postAComments(statusID: commentKeyBoardView.statusViewModel!.status.id, comment: content) { (data, error) in
         if error == nil
         {

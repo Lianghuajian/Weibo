@@ -9,7 +9,7 @@
 import UIKit
 
 let EmoticonCellID = "EmoticonCellID"
-
+///该类用于显示表情键盘以及处理表情点击
 class EmoticonView: UIView {
     
     ///表情点击闭包
@@ -37,7 +37,7 @@ class EmoticonView: UIView {
         //1,判断表情包数组是否有该表情,
         if packages[0].emoticons.contains(em)
         {
-            packages[0].emoticons[packages[0].emoticons.index(of: em)!].times += 1
+            packages[0].emoticons[packages[0].emoticons.firstIndex(of: em)!].times += 1
             packages[0].emoticons.sort(){ $0.times > $1.times}
             //packages[0].emoticons = ems
             return
@@ -46,7 +46,7 @@ class EmoticonView: UIView {
         packages[0].emoticons.insert(em, at: 0)
         //移除最后一个表情，倒数第一个是删除按钮我们要保留
         packages[0].emoticons.remove(at: ems.count-2)
-        packages[0].emoticons[packages[0].emoticons.index(of: em)!].times += 1
+        packages[0].emoticons[packages[0].emoticons.firstIndex(of: em)!].times += 1
         packages[0].emoticons.sort(){ $0.times > $1.times}
         //packages[0].emoticons = ems
     }
@@ -105,6 +105,7 @@ extension EmoticonView{
         prepareToolbar()
         
         prepareCollectionView()
+        
     }
     ///ToolBar的布局
     func prepareToolbar()  {

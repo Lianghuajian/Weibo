@@ -48,6 +48,9 @@ class StatusDAL {
                 print("使用了数据库数据")
                 finished(array!)
                 return
+            }else
+            {
+                finished(nil)
             }
         }
         else

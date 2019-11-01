@@ -48,7 +48,7 @@ class DetailTableViewCell: UITableViewCell {
             make.top.equalTo(self.spaView.snp.bottom)
             make.left.equalTo(self.contentView.snp.left)
             make.width.equalTo(screenWidth)
-            make.height.equalTo(cellHeight-spaHeight)
+            make.height.equalTo(screenWidth / 2)
         }
     }
     
@@ -69,7 +69,7 @@ class DetailTableViewCell: UITableViewCell {
     ///CollectionView
     lazy var collectionView : UICollectionView =
         {
-            let cv = UICollectionView.init(frame: CGRect.init(x: 0, y: spaHeight, width: screenWidth, height:(cellHeight-screenHeight*0.017)), collectionViewLayout: DetailCollectionViewFlowLayout())
+            let cv = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: DetailCollectionViewFlowLayout())
             return cv
     }()
     
@@ -97,7 +97,6 @@ extension DetailTableViewCell : UICollectionViewDataSource,UICollectionViewDeleg
         item.itemLabel.text = dict[indexPath.row].0
         item.itemImageView.image = UIImage.init(named: dict[indexPath.row].1)
         item.itemImageView.tintColor = UIColor.randomColor
-//        item.backgroundColor = UIColor.randomColor
         return item
     }
 }

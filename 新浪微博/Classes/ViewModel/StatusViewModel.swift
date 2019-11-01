@@ -128,14 +128,14 @@ extension StatusViewModel
             
             if error != nil
             {
-                print("微博评论数据加载错误")
+                print(#function,"微博评论数据加载错误")
                 completion(nil)
                 return
             }
             
             guard let dict = response as? [String : AnyObject] , let commentDict = dict["comments"] as? [[String : AnyObject]] else
             {
-                print("数据格式有问题")
+                print(#function,"数据为nil或格式有问题")
                 completion(nil)
                 return
             }
@@ -159,14 +159,14 @@ extension StatusViewModel
         NetworkTool.shared.loadAStatus(statusID: statusID) { (response, error) in
             if error != nil
             {
-                print("单条微博加载错误")
+                print(#function,"单条微博加载错误")
                 completion(nil)
                 return
             }
             
             guard let dict = response as? [String : AnyObject] else
             {
-                print("数据格式有问题")
+                print(#function,"数据为nil或格式为错误")
                 completion(nil)
                 return
             }

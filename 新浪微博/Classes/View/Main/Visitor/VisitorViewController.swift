@@ -42,11 +42,11 @@ class VisitorViewController: UIViewController {
 }
 extension VisitorViewController : VisitorViewDelegate{
     @objc func ClickRegisteButton() {
-        print("注册")
+        print(#function,"注册")
     }
     
     @objc func ClickLoginButton() {
-        print("登录")
+        print(#function,"登录")
         let VC =  OAuthLoginViewController()
         VC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(VC, animated: true)

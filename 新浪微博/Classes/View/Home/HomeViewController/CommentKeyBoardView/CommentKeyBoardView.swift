@@ -206,21 +206,21 @@ class CommentKeyBoardView: UIView {
 }
 extension CommentKeyBoardView : UITextViewDelegate
 {
-    func textViewDidChange(_ textView: UITextView) {
-        if textView.text != nil
-        {
-            sendButton.setTitleColor(.orange, for: .normal)
-            textViewPlaceHolder.isHidden = true
-            return
-        }
-        else
-        {
-            sendButton.setTitleColor(.black , for: .normal)
-           textViewPlaceHolder.isHidden = false
-        }
-    
-    }
    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.length != 0
+               {
+                   sendButton.setTitleColor(.orange, for: .normal)
+                   textViewPlaceHolder.isHidden = true
+                   return
+               }
+               else
+               {
+                   sendButton.setTitleColor(.black , for: .normal)
+                  textViewPlaceHolder.isHidden = false
+               }
+    }
+    
 }
 class PickButton: UIButton {
     

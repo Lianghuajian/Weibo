@@ -17,8 +17,11 @@ import UIKit
             if isNeedHeader {
                 self.tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
             }else if self.tableView.mj_header != nil {
+                
                 self.tableView.mj_header.endRefreshing()
+                
                 self.tableView.mj_header.removeFromSuperview()
+                
                 self.tableView.mj_header = nil
             }
         }
@@ -34,8 +37,11 @@ import UIKit
             }
         }
     }
+    
     var listViewDidScrollCallback: ((UIScrollView) -> ())?
+    
     var lastSelectedIndexPath: IndexPath?
+    
     var isHeaderRefreshed = false
 
     deinit {
@@ -46,11 +52,17 @@ import UIKit
         super.init(frame: frame)
 
         tableView = UITableView(frame: frame, style: .plain)
+        
         tableView.backgroundColor = UIColor.white
+        
         tableView.tableFooterView = UIView()
+        
         tableView.dataSource = self
+        
         tableView.delegate = self
+        
         tableView.register(TestTableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
+        
         addSubview(tableView)
     }
 

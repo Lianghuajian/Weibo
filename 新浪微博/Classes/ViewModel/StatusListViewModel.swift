@@ -112,7 +112,6 @@ extension StatusListViewModel{
         //建立单图缓存组，使用组保证了图片一次性缓存（同步任务的完成），缓存结束后再去进行布局
         let group = DispatchGroup()
         
-        
         for status in StatusList {
             //拿到单张图片的微博，否则继续往下寻找
             if status.thumbnails?.count != 1
@@ -124,6 +123,7 @@ extension StatusListViewModel{
             //设置了retryFailed，当请求失败会重新执行该闭包内容，如果里面有某些信号量的处理，可能会引起越界，如group.leave()
             //设置了refreshCached，sdWeb请求服务器下载图片的时候会把缓存图片的hash值发送给服务器做图片校验，如果一样服务器返回304，否则重新执行该闭包下载，也会引起信号量的处理
             group.enter()
+            
             SDWebImageManager.shared().loadImage(with: status.thumbnails![0],
                                                  options: [],
                                                  progress:nil,

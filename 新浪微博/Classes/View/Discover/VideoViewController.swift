@@ -12,12 +12,14 @@ class VideoViewController: UIViewController {
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         setUpUI()
     }
     deinit {
         releasePlayer()
     }
     func setUpUI(){
+        
         if player == nil
         {
             player = WMPlayer.init(model: playerModel)

@@ -10,12 +10,13 @@
 import UIKit
 
 extension UIImage{
+    
     func scaleTo(width : CGFloat) -> UIImage {
         if width > size.height
         {
             return self
         }
-    
+        
         let height = size.height*width/size.width
         let rect = CGRect.init(x: 0, y: 0, width: width, height: height)
         
@@ -25,4 +26,18 @@ extension UIImage{
         UIGraphicsEndImageContext()
         return result
     }
+    
+//    func writeToPhotosAlbum(completion : ((_ isSuccess : Bool , _ error : NSError?) -> Void)?) {
+//        
+//        UIImageWriteToSavedPhotosAlbum(self, self, #selector(finishSavingToPhotosAlbum(UIImage:error:contextInfo:)), nil)
+//        
+//    }
+////签名规则
+//// - (void)image:(UIImage *)image
+////    didFinishSavingWithError:(NSError *)error
+////                 contextInfo:(void *)contextInfo
+//    @objc func finishSavingToPhotosAlbum(UIImage : UIImage , error : NSError , contextInfo : AnyObject)
+//    {
+//        
+//    }
 }

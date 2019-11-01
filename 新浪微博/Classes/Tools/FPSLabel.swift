@@ -39,7 +39,7 @@ class FPSLabel: UILabel {
             //print("lastTime \(lastTime)")
             return
         }
-    //用来记录一秒进入这个方法多少次，如果进入了20次那么count就变成20，20帧
+        //用来记录一秒进入这个方法多少次，如果进入了20次那么count就变成20，20帧
         count += 1
         //在一秒内打印的次数
         let delta = link.timestamp - lastTime

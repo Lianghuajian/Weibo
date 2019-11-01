@@ -41,12 +41,14 @@ class HomeWebViewController: UIViewController {
     func prepareWebView()
     {
         self.view.addSubview(webView)
+        
         webView.snp.makeConstraints { (make) in
             make.left.equalTo(self.view.snp.left)
             make.top.equalTo(self.view.snp.top)
             make.width.equalTo(self.view.bounds.size.width)
             make.height.equalTo(self.view.bounds.size.height)
         }
+        
         webView.navigationDelegate = self
         webView.load(URLRequest.init(url: url))
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: NSKeyValueObservingOptions.new, context: nil)

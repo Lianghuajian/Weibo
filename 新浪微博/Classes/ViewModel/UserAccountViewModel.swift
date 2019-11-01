@@ -75,8 +75,7 @@ class UserAccountViewModel {
         }
         
         //过期的解档方法
-        //account = NSKeyedUnarchiver.unarchiveObject(withFile: accountPath) as? UserAccount
-    }
+     }
     
     ///更新当前用户账户
     class func upDateUserAccount(){
@@ -115,17 +114,20 @@ extension UserAccountViewModel {
                 finished(false)
                 return
             }
+            
             guard let dict = data as? [String : Any] else{
                 print("格式错误")
                 finished(false)
                 return
             }
+            
             guard let account = self.account else{
                 print("用户未初始化")
                 finished(false)
                 return
             }
-            print(dict["location"])
+            
+            print(dict["location"] ?? "沙盒地址没找到")
            
             if  dict.keys.contains("error") && (dict["error"] as! String) == "User requests out of rate limit!"
             {
@@ -145,21 +147,11 @@ extension UserAccountViewModel {
                 }
                 //Json -> data
                 let d = try JSONSerialization.data(withJSONObject: sdict, options: []);
-                self.account?.status = try JSONDecoder.init().decode(Status.self, from: d)
-//                guard let udict = sdict["user"] as? [String : AnyObject] else
-//                {
-//                    return
-//                }
-//                 d = try JSONSerialization.data(withJSONObject: udict, options: []);
-//                self.account?.status?.user = try JSONDecoder.init().decode(User.self, from: d)
-            }catch
+                self.account?.status = try JSONDecoder.init().decode(Status.self, from: d)            }catch
             {
                 self.account = nil
             }
-//            print("userAountpath=\(self.accountPath)")
-           //把数据写入沙盒
-            //NSKeyedArchiver.archiveRootObject(account, toFile: self.accountPath.absoluteString)
-            
+     
             do {
                 let data = try NSKeyedArchiver.archivedData(withRootObject: account, requiringSecureCoding: false)
                 do{

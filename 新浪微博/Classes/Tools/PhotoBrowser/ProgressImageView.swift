@@ -34,13 +34,15 @@ class ProgressImageView: UIImageView {
     func setupUI() {
         //1,添加子控件
         addSubview(progressview)
+        
         progressview.backgroundColor = .clear
-        //2,布局
-        progressview.snp.makeConstraints { (make) in
-            make.edges.equalTo(self.snp.edges)
+        
         }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        progressview.frame = CGRect.init(x: (self.bounds.width)/2 - 25, y: (self.bounds.height)/2 - 25, width: 50, height: 50)
+          
     }
-    
     //套一个UIView到ImageView上面，imageView初始化不会调用drawRect
     lazy var progressview = ProgressView()
 }

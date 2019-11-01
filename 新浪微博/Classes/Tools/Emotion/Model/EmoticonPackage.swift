@@ -48,7 +48,9 @@ class EmoticonPackage: NSObject {
             }
             
             }
+            
         }
+        
         appendEmpty()
     }
     

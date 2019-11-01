@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SVProgressHUD
 //API:https://open.weibo.com/wiki/微博API
 
 //网络单例
@@ -33,7 +34,7 @@ final class NetworkTool
         return url!
     }()
     
-    lazy var reachabilityManager = Alamofire.NetworkReachabilityManager.init()
+    lazy var reachabilityManager = Alamofire.NetworkReachabilityManager()
 }
 
 //MARK: - 获取用户信息
@@ -195,8 +196,26 @@ extension NetworkTool
         request(RequestMethod: .post, URLString: "https://api.weibo.com/oauth2/access_token", parameters: paras, progress: nil, finished: success)
     }
 }
+//todo:用于直接拼接token到协议头，没有成功
+//微博API的解释
+//使用OAuth2.0调用API接口有两种方式：
+//1、 直接使用参数，传递参数名为 access_token
+//URL
+//1
+//https://api.weibo.com/2/statuses/public_timeline.json?access_token=abcd
+//2、在header里传递，形式为在header里添加 Authorization:OAuth2空格abcd，这里的abcd假定为Access Token的值，其它接口参数正常传递即可。
+class TokenAdapter: RequestAdapter {
+    func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
+        var request = urlRequest
+        
+        guard let token = UserAccountViewModel.shared.accessToken else {
+            return request
+        }
+      request.setValue(token, forHTTPHeaderField: "Authorization:OAuth2 ")
 
-
+        return request
+    }
+}
 //MARK: - 封装AFNetwork请求方法
 extension NetworkTool{
     /// Token网络请求，请求微博相关数据直接使用该方法，里面已经封装好token
@@ -209,18 +228,17 @@ extension NetworkTool{
     ///   - success: 成功回调
     func tokenRequest(RequestMethod : HTTPMethod,URLString : String, parameters : [String : Any]? , progress :((Progress)->Void)? , finished : @escaping (completion)){
         
-        var para = parameters
-        
-        if !appendToken(parameters: &para){
+        var paras = parameters
+
+        if !appendToken(parameters: &paras){
             finished(nil,NSError(domain: "cn.itcast.error", code: -1001, userInfo: ["message":"token为空"]))
         }
-        request(RequestMethod: RequestMethod, URLString: URLString, parameters: para, progress: progress, finished: finished)
+        request(RequestMethod: RequestMethod, URLString: URLString, parameters: paras, progress: progress, finished: finished)
     }
     ///从用户模型中拿到token并拼接到parameters中
     func appendToken(parameters :inout [String:Any]?) -> Bool {
         
         guard let token = UserAccountViewModel.shared.accessToken else {
-            
             return false
         }
         
@@ -241,10 +259,16 @@ extension NetworkTool{
     ///   - parameters: POST的参数
     ///   - progress: 请求过程补抓
     ///   - success: 成功回调
-    func request(RequestMethod : HTTPMethod,URLString : String, parameters :  [ String : Any]? , progress :((Progress)->Void)? , finished : @escaping (completion)){
+     func request(RequestMethod : HTTPMethod,URLString : String, parameters :  [ String : Any]? , progress :((Progress)->Void)? , finished : @escaping (completion)){
+        if !NetworkTool.hasNetwork() {
+            SVProgressHUD.showInfo(withStatus: "没有网络请求失败")
+            finished(nil,nil)
+            return
+        }
         //iOS电池栏网络加载小圆圈
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        Alamofire.request(URLString, method: RequestMethod, parameters: parameters).responseJSON { (response) in
+            SessionManager.default.request(URLString, method: RequestMethod, parameters: parameters).responseJSON { (response) in
+                print("本次请求的RRT：",response.timeline.description)
              UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if response.error != nil{
                finished(nil,response.error!)
@@ -283,7 +307,6 @@ extension NetworkTool{
                     multipartFormData.append(strData, withName: k)
                 }
             }
-            
         }, to: URLString) {  encodingResult in
             switch encodingResult {
             case .success(let upload, _, _):

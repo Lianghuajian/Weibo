@@ -105,8 +105,6 @@ extension StatusPictureView
         
         let w = column * itemwidth + (column-1)*pictureMargins + 1
         
-        //print("H = \(h) ----------------------------------- W = \(w)")
-        
         return CGSize.init(width: w, height: h)
         
     }
@@ -164,7 +162,7 @@ extension StatusPictureView : PhotoBrowserPresentDelegate
             return CGRect.zero
         }
         
-        guard  let image = SDWebImageManager.shared().imageCache?.imageFromDiskCache(forKey: url) else {
+        guard let image = SDWebImageManager.shared().imageCache?.imageFromDiskCache(forKey: url) else {
             return CGRect.zero
         }
         
@@ -188,12 +186,7 @@ extension StatusPictureView : PhotoBrowserPresentDelegate
         let rect = CGRect.init(x: 0, y: y, width: w, height: h)
         
         //测试代码
-//        let v = PhotoForAnimation(indexPath: indexPath)
-//
-//        v.frame = rect
-//        
-//        UIApplication.shared.keyWindow?.addSubview(v)
-        
+      
         return rect
         
     }
@@ -249,23 +242,42 @@ private class PictrueViewCell: UICollectionViewCell {
 
     var imageURL : URL?{
         didSet{
-            iconView.sd_setImage(with: imageURL!, placeholderImage: nil, options: [SDWebImageOptions.retryFailed    //超过15s就记录防止再次访问
-                ,SDWebImageOptions.refreshCached//防止URL不变数据源变了，及时更新
-                ], completed: nil)
-            if (imageURL!.absoluteString as NSString).pathExtension == "gif"
+            
+            if imageURL == nil
+            {
+                return
+            }
+            
+            self.iconView.runLoopMode = RunLoop.Mode.default.rawValue
+            
+            var gifURL : URL?
+            
+            if imageURL!.absoluteString.contains("gif")
+            {
+                gifURL = URL.init(string: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569690015484&di=ead4099b09539baff1532c7e3014c1de&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160419%2F2512293c057d45aa8450fa3810fc1263_th.jpg")
+                
+            }
+         
+iconView.sd_setImage(with: gifURL == nil ? imageURL! : gifURL!, placeholderImage: nil, options: [.retryFailed,.refreshCached]) { (image, error, cacheType, url) in
+               
+            }
+         if (imageURL!.absoluteString as NSString).pathExtension == "gif"
             {
                 self.gifView.isHidden = false
-            }else
+            }
+            else
             {
                 self.gifView.isHidden = true
             }
+            
         }
+        
     }
     
     //懒加载要指明类型，否则其他地方调用不清楚其属性
-    private lazy var iconView : UIImageView = {
+    private lazy var iconView : FLAnimatedImageView = {
         
-        let iv =  UIImageView()
+        let iv =  FLAnimatedImageView()
         //多出来的裁减掉，留中间
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true

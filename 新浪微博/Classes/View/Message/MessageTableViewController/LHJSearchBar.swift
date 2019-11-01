@@ -27,7 +27,7 @@ class LHJSearchBar: UISearchBar {
         guard let searchField = self.value(forKey: "searchField") as? UITextField else {
             return
         }
-
+    
         //通过判断是否有展现cancelButton去调整宽度
                 if showsCancelButton == false
                 {
@@ -46,7 +46,7 @@ class LHJSearchBar: UISearchBar {
                         searchField.frame = CGRect.init(x: textFieldFrame!.origin.x, y: textFieldFrame!.origin.y, width: screenWidth * 0.9 - self.cancelButton!.frame.size.width + 10, height: textFieldFrame!.size.height)
                     }else
                     {
-                        searchField.frame = CGRect.init(x:screenWidth*0.025, y: self.frame.height*0.15, width:screenWidth * 0.9 - self.cancelButton!.frame.size.width + 10 , height: screenHeight*0.054)
+                        searchField.frame = CGRect.init(x:screenWidth*0.025, y: self.frame.height*0.15, width:screenWidth * 0.9 - 50 + 10 , height: screenHeight*0.054)
                     }
                 }
     }
@@ -59,9 +59,9 @@ class LHJSearchBar: UISearchBar {
                 
                 if let _cls = NSClassFromString("UINavigationButton") {
                     
+                    print(_v)
                     if _v.isKind(of: _cls) {
                         guard let btn = _v as? UIButton else { return nil}
-                        
                         btn.setTitle("取消", for: .normal)
                         btn.setTitleColor(UIColor.white, for: .normal)
                         

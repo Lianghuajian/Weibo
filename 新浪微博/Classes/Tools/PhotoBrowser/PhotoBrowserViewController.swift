@@ -8,7 +8,7 @@
 
 import UIKit
 import SVProgressHUD
-let pictureCellID = "pictureCellID"
+fileprivate let pictureCellID = "pictureCellID"
 
 class PhotoBrowserViewController: UIViewController {
     
@@ -23,7 +23,7 @@ class PhotoBrowserViewController: UIViewController {
     }
     
     @objc func save(){
-       let cell = collectionView.visibleCells[0] as! PictureCollectionViewCell
+        let cell = collectionView.visibleCells[0] as! PictureCollectionViewCell
         //cell中是否有图片
         guard let image = cell.imageview.image else{
             return
@@ -31,36 +31,40 @@ class PhotoBrowserViewController: UIViewController {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
     }
     //保存图片的Selector应有的格式
-    //- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
     @objc func image(image:UIImage,didFinishSavingWithError error : NSError? , contextInfo: AnyObject?) {
         
         let message = (error == nil) ? "保存成功" : "保存失败"
         
         SVProgressHUD.showInfo(withStatus: message)
         
-     }
+    }
     
     //MARK: - 生命周期
     //loadView:用于设置视图层次结构，系统调用view的getter方法时候发现view为nil就会调用该方法
     override func loadView() {
         
         var bounds = UIScreen.main.bounds
-
+        
         bounds.size.width += 20
         
         view = UIView(frame:bounds)
-
-        setupUI()
         
     }
     //viewDidLoad:用于添加数据给UI或其他操作
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
-        //根据用户点击显示当前图片
-        collectionView.scrollToItem(at: currentIndexPath, at: .centeredHorizontally, animated: false)
+        
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //跳转完毕后再进行布局，否则会出现卡屏
+        self.setupUI()
+        //根据用户点击显示当前图片
+        self.collectionView.scrollToItem(at: self.currentIndexPath, at: .centeredHorizontally, animated: false)
+        
+        
+    }
     init(urls:[URL],indexPath : IndexPath) {
         
         self.urls = urls
@@ -77,9 +81,12 @@ class PhotoBrowserViewController: UIViewController {
     
     //MARK: - 成员变量
     lazy var collectionView = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: PictureCollectionsFlowLayout())
+    
+    lazy var pageController = UIPageControl()
+    
     lazy var saveBtn = UIButton.init(text: "保存", textColor: .white, backImage: nil, isBack: false,backgroundColor : .lightGray)
+    
     lazy var closeBtn = UIButton.init(text: "取消", textColor: .white, backImage: nil, isBack: false,backgroundColor : .lightGray)
-
     //MAKR: - collectionView布局
     private class PictureCollectionsFlowLayout : UICollectionViewFlowLayout{
         override func prepare() {
@@ -100,53 +107,48 @@ class PhotoBrowserViewController: UIViewController {
             
         }
     }
+    deinit {
+        print(#file,#function)
+    }
 }
 
 //MARK: - UI布局
 extension PhotoBrowserViewController{
     
     func setupUI() {
-        
-        //1，添加控件
+  
         self.view.addSubview(collectionView)
-        self.view.addSubview(saveBtn)
-        self.view.addSubview(closeBtn)
+        
+        self.view.insertSubview(pageController, aboveSubview: collectionView)
+        
         collectionView.frame = view.bounds
-        saveBtn.layer.cornerRadius = 15
-        saveBtn.layer.masksToBounds = true
-        closeBtn.layer.cornerRadius = 15
-        closeBtn.layer.masksToBounds = true
         
-        //2，添加布局
-        saveBtn.snp.makeConstraints { (make) in
-            make.right.equalTo(self.view.snp.right).offset(-36)
-            make.bottom.equalTo(self.view.snp.bottom).offset(-36)
-            make.size.equalTo(CGSize(width: 100, height: 36))
-        }
-        
-        closeBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(self.view.snp.left).offset(16)
-            make.bottom.equalTo(self.view.snp.bottom).offset(-36)
-            make.size.equalTo(CGSize(width: 100, height: 36))
-        }
-        
-        //3，添加监听
-        saveBtn.addTarget(self, action: #selector(save), for: .touchUpInside)
-        closeBtn.addTarget(self, action: #selector(close), for: .touchUpInside)
-        
-        //4，准备collectionView
-        prepareCollectionView()
-    }
-    ///collectionView的布局
-    func prepareCollectionView() {
         collectionView.register(PictureCollectionViewCell.self, forCellWithReuseIdentifier: "pictureCellID")
+        
         collectionView.dataSource = self
+        collectionView.delegate = self
+        pageController.numberOfPages = urls.count
+        
+        pageController.frame.size = CGSize.init(width: urls.count * 33, height: 44)
+        
+        pageController.frame.origin = CGPoint.init(x: (screenWidth - pageController.frame.size.width ) / 2 , y:screenHeight * 0.85 )
+    
     }
+  
 }
 
 //MARK: - collectionView的代理方法
-extension PhotoBrowserViewController : UICollectionViewDataSource
+extension PhotoBrowserViewController : UICollectionViewDataSource , UICollectionViewDelegate
 {
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let currentRow = collectionView.indexPath(for: collectionView.visibleCells[0])?.row else
+        {
+            return
+        }
+        pageController.currentPage = currentRow
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return urls.count
@@ -156,12 +158,57 @@ extension PhotoBrowserViewController : UICollectionViewDataSource
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: pictureCellID, for: indexPath) as! PictureCollectionViewCell
         
-        cell.pictrueurl = urls[indexPath.item]
+        cell.pictrueUrl = urls[indexPath.item]
         
         cell.pictureDelegate = self
         
+        cell.addGestureRecognizer(UILongPressGestureRecognizer.init(target: self, action: #selector(pressPictrue(gesture:))))
+        
         return cell
     }
+    
+    @objc func pressPictrue(gesture:UILongPressGestureRecognizer)
+    {
+        
+        let alertController = AlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alertController.addAction(title: "发送", style: .default) { (action) in
+           
+            SVProgressHUD.showSuccess(withStatus: "发送给朋友成功")
+        }.addAction(title: "保存", style: .default) { (action) in
+            //保存图片
+            guard let image = (gesture.view as? PictureCollectionViewCell)?.imageview.image else
+            {
+                SVProgressHUD.showSuccess(withStatus: "图片失效")
+                return
+            }
+            
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.finishSavingPhotoToAlbum(image:error:contextInfo:)), nil)
+            
+        }.addAction(title: "编辑", style: .default) { (action) in
+            //保存图片
+            SVProgressHUD.showSuccess(withStatus: "编辑图片成功")
+        }
+        .addAction(title: "取消", style: .default) { (action) in
+            //取消
+            return
+        }
+         
+        self.present(alertController, animated: true) {
+        }
+        
+    }
+    
+    @objc func finishSavingPhotoToAlbum(image : UIImage? , error : NSError? , contextInfo : AnyObject?)
+    {
+        if error != nil {
+            dump(error)
+            SVProgressHUD.showInfo(withStatus: "保存图片失败")
+            return
+        }
+        SVProgressHUD.showSuccess(withStatus: "保存图片成功")
+    }
+        
 }
 
 //MARK: - 图片点击代理
@@ -169,8 +216,10 @@ extension PhotoBrowserViewController : TouchPictureDelegate
 {
     func photoBrowserDidZoom(scale: CGFloat) {
         //CollectionViewController里面 view中装载着collectionView
-       let ishidden = scale < 1
+        let ishidden = scale < 1
+        
         hideControls(isHidden: ishidden)
+        
         if scale < 1 {
             view.alpha = scale
             view.transform = CGAffineTransform.init(scaleX: scale, y: scale)
@@ -217,7 +266,7 @@ extension PhotoBrowserViewController : PhotoBrowserDismissDelegate{
     }
     
     func CurrentIndexPath() -> IndexPath? {
-       return self.collectionView.indexPathsForVisibleItems[0]
+        return self.collectionView.indexPathsForVisibleItems[0]
     }
     
 }

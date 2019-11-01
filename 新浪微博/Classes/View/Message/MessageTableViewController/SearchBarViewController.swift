@@ -12,9 +12,6 @@ class SearchBarViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        searchBar?.delegate = self
-        // Do any additional setup after loading the view.
-       
         prepareSearchBar()
     }
     func prepareSearchBar()  {
@@ -33,36 +30,35 @@ class SearchBarViewController: UIViewController {
     var searchBar : LHJSearchBar = {
 //       let sb = LHJSearchBar.init(frame: CGRect.init(x: 0, y: screenHeight * 0.035, width: screenWidth, height: 44), placeHolder: "Search", leftImage: nil, showsCancelButton: true, tintColor: backColor)
         let sb = LHJSearchBar.init(frame: CGRect.zero, placeHolder: "Search", leftImage: nil, showsCancelButton: true, tintColor: backColor)
+        
         sb.setBackgroundImage(UIImage.init(), for: .any, barMetrics: .default)
+        
         sb.backgroundColor = UIColor.init(red: 201.0/255.0, green: 201.0/255.0, blue: 206.0/255.0, alpha: 1)
+        
         return sb
     }()
+   
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 extension SearchBarViewController : UISearchBarDelegate
 {
-
+    
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        
         defer {
             dismiss(animated: true, completion: nil)
         }
+        
         searchBar.resignFirstResponder()
+        
         return true
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
         defer {
             dismiss(animated: true, completion: nil)
         }
+        
         searchBar.resignFirstResponder()
     }
 }

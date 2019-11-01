@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,13 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        FMDBManager.shared.DBqueue?.inDatabase({ (db) in
-//            do{ try db.executeUpdate("DROP TABLE T_Status", values: nil)
-//                print("删除T_Status成功")
-//            }
-//            catch{ print("删除T_Status失败")}
-//        })
-
+        
+        SDImageCache.shared().config.maxCacheAge = 3600 * 24 * 7 //1 Week
+        
+        SDImageCache.shared().maxMemoryCost = 1024 * 1024 * 20 //Aprox 20 images
+        
+        //SDImageCache.shared().config.shouldCacheImagesInMemory = false //Default True => Store images in RAM cache for Fast performance
+        
+        SDImageCache.shared().config.shouldDecompressImages = false
+        
+        SDWebImageDownloader.shared().shouldDecompressImages = false
+        
+        
         setUpAppearence()
         // Override point for customization after application launch.
         window = UIWindow.init(frame: UIScreen.main.bounds)

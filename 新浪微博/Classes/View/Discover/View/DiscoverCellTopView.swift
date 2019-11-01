@@ -68,7 +68,10 @@ make.left.equalTo(self.iconImageView.snp.right).offset(DiscoverCellMargins)
     {
         didSet
         {
-            self.iconImageView.sd_setImage(with: URL.init(string: videoModel!.avatar_thumb!), completed: nil)
+            guard let avatar_thumb = videoModel?.avatar_thumb , let url = URL.init(string: avatar_thumb) else {
+                return
+            }
+            self.iconImageView.sd_setImage(with: url, completed: nil)
             self.nameLabel.text = videoModel?.nickname
         }
         

@@ -134,7 +134,7 @@ extension PhotoBrowserTransitioningDelegate: UIViewControllerAnimatedTransitioni
             imageView.frame = PhotoPresentDelegate.PhotoBrowserPresentFromRect(indexPath: indexpath)
 //            print(transitionContext.containerView.frame)
         }) { (_) in
-//          imageView.isHidden = true
+
             imageView.removeFromSuperview()
             transitionContext.completeTransition(true)
         }

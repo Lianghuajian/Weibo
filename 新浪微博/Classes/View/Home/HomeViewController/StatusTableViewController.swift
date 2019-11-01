@@ -8,12 +8,12 @@
 
 import UIKit
 import SVProgressHUD
+import SDWebImage
 
 let OriginStatusCellID = "OriginStatusCellID"
 let RetweetedStatusCellID = "RetweetedStatusCellID"
 
 class StatusTableViewController: VisitorViewController {
-    
     
     //MARK: - 生命周期
     override func viewWillAppear(_ animated: Bool) {
@@ -24,11 +24,13 @@ class StatusTableViewController: VisitorViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         if !UserAccountViewModel.shared.userLoginStatus {
             self.navigationItem.title = "消息"
             visitorview?.setUpInfo(imagename: "visitordiscover_image_message", text: "登录后，别人评论你的微博，发给你的消息，都会在这里收到通知。")
             return
         }
+        
         //没有登录才去设置
         prepareTableView()
         
@@ -69,13 +71,17 @@ class StatusTableViewController: VisitorViewController {
             vc.modalPresentationStyle = .custom
             
             vc.transitioningDelegate = self?.photoTransitionDelegate
-            
+            /*如何跳转完成跳转转场并显示加载动画
+             1.通过转场代理创建转场动画，转场前的小图尺寸，以及转场后的大图尺寸
+             2.present的时候我们不要在viewDidLoad中加载CollectionView视图，否则会出现重影，我们要在viewDidAppear中进行CollectionView布局
+             3.这时候布局CollectionView，把图片缩略图拉伸到屏幕宽度再显示，这时候是模糊的，然后在加载完大图之后切换图片，达到同等显示图片尺寸，从模糊到清晰的过渡
+             
+             */
             //通过回传的PhotoView把其设置为代理对象
             self?.photoTransitionDelegate.setPhotoDelegate(indexPath: indexpath, presentDelegate: cell, dismissDelegate: vc)
-            
-            self?.present(vc, animated: true
-                , completion: nil)
-            
+            //开始跳转
+            self?.present(vc, animated: true)
+              
         }
     }
     
@@ -83,8 +89,6 @@ class StatusTableViewController: VisitorViewController {
         
         finishComment()
     }
-    
-   
     
     ///注册原创和转发微博cell
     ///设置预估高度
@@ -157,8 +161,6 @@ class StatusTableViewController: VisitorViewController {
     ///加载微博数据，里面会进行本地缓存判断。
     @objc func loadStatus(){
         
-        //        tableView.refreshControl?.beginRefreshing()
-        
         statusListViewModel.loadStatus(isPullUp:  !tableView.mj_header.isRefreshing)
         { (isSuccess) in
             
@@ -166,10 +168,10 @@ class StatusTableViewController: VisitorViewController {
             {
                 SVProgressHUD.showInfo(withStatus: "加载数据错误，请稍后再试")
                 self.reloadButton.isHidden = false
+                self.tableView.mj_header.endRefreshing()
+                self.tableView.mj_footer.endRefreshing()
                 return
             }
-            
-            //            self.addRefreshStatusLabel()
             
             self.reloadButton.isHidden = true
             self.tableView.mj_header.endRefreshing()
@@ -178,17 +180,11 @@ class StatusTableViewController: VisitorViewController {
                 self.tableView.reloadData()
             }
             
-            //            Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false
-            //                , block: { (_) in
-            //                    self.tableView.refreshControl?.endRefreshing()
-            //            })
+        
         }
         
     }
-    ///TargetAction通知
-    //    @objc func startRefreshing() {
-    //        loadStatus()
-    //    }
+
     
     func addRefreshStatusLabel()  {
         
@@ -313,6 +309,11 @@ class StatusTableViewController: VisitorViewController {
             }
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
+    
     //MARK: - 成员变量
     lazy var tableView : UITableView = UITableView.init()
     
@@ -392,9 +393,7 @@ class StatusTableViewController: VisitorViewController {
 //MARK: - tableView代理方法
 extension StatusTableViewController : UITableViewDelegate,UITableViewDataSource
 {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(#function,indexPath.row)
-    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -417,11 +416,6 @@ extension StatusTableViewController : UITableViewDelegate,UITableViewDataSource
         cell.clickLabelDelegate = self
         
         cell.topView.clickdelegate = self
-        
-        //        if indexPath.row == statusListViewModel.statusList.count-1{
-        //            self.tableView.mj_footer
-        //        }
-        
 
         return cell
     }
@@ -448,7 +442,9 @@ extension StatusTableViewController : UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
         return indicator
+        
     }
     
 }
@@ -525,11 +521,7 @@ extension StatusTableViewController : CommentKeyBoardViewDelegate
             {
                 self.finishComment()
                 SVProgressHUD.showSuccess(withStatus: String.init(format: "成功评论%@的微博",commentKeyBoardView.statusViewModel!.status.user!.screen_name!))
-                
-                
-                
-            }
-            
+            } 
         }
     }
     
@@ -559,17 +551,27 @@ extension StatusTableViewController : ClickTopViewProtocol
     func clickCloseButton(statusTopView: StatusTopView) {
         
          let ac = UIAlertController.init(title: "删除微博", message: "确定要删除该条微博吗", preferredStyle: .actionSheet)
-        ac.addAction(.init(title: "确定", style: .destructive, handler: { (action) in
+        ac.addAction(title: "确定", style: .destructive) { (action) in
             self.tableView.beginUpdates()
-            self.statusListViewModel.statusList.remove(at: statusTopView.viewModel!.indexPath!.row)
-            self.tableView.deleteRows(at:[statusTopView.viewModel!.indexPath!] , with: .fade)
-            self.tableView.endUpdates()
-        }))
-        ac.addAction(.init(title: "取消", style: .cancel, handler: { (action) in
+                       self.statusListViewModel.statusList.remove(at: statusTopView.viewModel!.indexPath!.row)
+                       self.tableView.deleteRows(at:[statusTopView.viewModel!.indexPath!] , with: .fade)
+                       self.tableView.endUpdates()
+        }.addAction(title: "取消", style: .cancel) { (action) in
             return
-        }))
+        }
+
         self.present(ac, animated: true,completion: nil)
     }
 
 }
 
+extension UIAlertController
+{
+    func addAction(title : String , style : UIAlertAction.Style , handler : ((UIAlertAction) -> Void)?) -> UIAlertController
+    {
+        self.addAction(.init(title: title, style: style, handler: { (action) in
+            handler?(action)
+        }))
+        return self
+    }
+}
