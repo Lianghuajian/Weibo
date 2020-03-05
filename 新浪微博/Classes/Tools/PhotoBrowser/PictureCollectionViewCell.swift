@@ -241,7 +241,6 @@ extension PictureCollectionViewCell{
         if lastPosition.y < currentPosition.y
         {
             isDragging = true
-            print("向下拉")
             lastPosition = .zero
         }
     

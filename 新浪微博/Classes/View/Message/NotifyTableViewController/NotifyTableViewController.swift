@@ -61,12 +61,12 @@ class NotifyViewController: UIViewController {
     func prepareRefreshControl()
     {
         tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: startRefreshing)
-        (tableView.mj_header as? MJRefreshStateHeader)?.lastUpdatedTimeLabel.isHidden = true
+        (tableView.mj_header as? MJRefreshStateHeader)?.lastUpdatedTimeLabel?.isHidden = true
     }
     @objc func startRefreshing() {
         
         Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { (_) in
-            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_header?.endRefreshing()
         }
     }///中间提示label，注意该Label的布局放到pageViewController中布局
     lazy var label = UILabel.init(size: 18, content: "还没有收到消息哦", color: .lightGray, alignment: .center, lines: 0, breakMode: .byTruncatingTail)

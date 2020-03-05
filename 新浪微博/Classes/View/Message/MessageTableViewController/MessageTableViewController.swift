@@ -25,12 +25,12 @@ class MessageTableViewController: UIViewController {
     func prepareRefreshControl()
     {
         tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: startRefreshing)
-        (tableView.mj_header as? MJRefreshStateHeader)?.lastUpdatedTimeLabel.isHidden = true
+        (tableView.mj_header as? MJRefreshStateHeader)?.lastUpdatedTimeLabel?.isHidden = true
     }
     @objc func startRefreshing() {
         
         Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { (_) in
-            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_header?.endRefreshing()
         }
     }
     func prepareSearchBar() {

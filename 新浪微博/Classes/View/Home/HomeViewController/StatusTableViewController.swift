@@ -117,10 +117,10 @@ class StatusTableViewController: VisitorViewController {
         tableView.estimatedRowHeight = 400
         
         tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: loadStatus)
-        (tableView.mj_header as? MJRefreshStateHeader)?.lastUpdatedTimeLabel.isHidden = true
+        (tableView.mj_header as? MJRefreshStateHeader)?.lastUpdatedTimeLabel?.isHidden = true
         tableView.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: loadStatus)
         
-        tableView.mj_header.beginRefreshing()
+        tableView.mj_header?.beginRefreshing()
         tapGesture.delegate = self.viewAboveTableView
     }
     
@@ -161,21 +161,21 @@ class StatusTableViewController: VisitorViewController {
     ///加载微博数据，里面会进行本地缓存判断。
     @objc func loadStatus(){
         
-        statusListViewModel.loadStatus(isPullUp:  !tableView.mj_header.isRefreshing)
+        statusListViewModel.loadStatus(isPullUp:  !(tableView.mj_header?.isRefreshing ?? false))
         { (isSuccess) in
             
             if isSuccess == false
             {
                 SVProgressHUD.showInfo(withStatus: "加载数据错误，请稍后再试")
                 self.reloadButton.isHidden = false
-                self.tableView.mj_header.endRefreshing()
-                self.tableView.mj_footer.endRefreshing()
+                self.tableView.mj_header?.endRefreshing()
+                self.tableView.mj_footer?.endRefreshing()
                 return
             }
             
             self.reloadButton.isHidden = true
-            self.tableView.mj_header.endRefreshing()
-            self.tableView.mj_footer.endRefreshing()
+            self.tableView.mj_header?.endRefreshing()
+            self.tableView.mj_footer?.endRefreshing()
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }

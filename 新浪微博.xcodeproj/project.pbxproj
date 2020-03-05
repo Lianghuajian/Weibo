@@ -9,16 +9,8 @@
 /* Begin PBXBuildFile section */
 		37F93FBCD7A75B1BBFCE2AA4 /* Pods_____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0E9620A00771451CD681F6 /* Pods_____UITests.framework */; };
 		690FD87B22C8A3B600388A6F /* CommentKeyBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690FD87A22C8A3B600388A6F /* CommentKeyBoardView.swift */; };
-		69100A552354407B00717B01 /* EmoticonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69100A542354407B00717B01 /* EmoticonLayer.swift */; };
 		69215C092276E43C00962D46 /* HomeWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69215C082276E43C00962D46 /* HomeWebViewController.swift */; };
-		6926CAA223126BB100B39BF2 /* WMPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926CA7F23126BB100B39BF2 /* WMPlayerModel.m */; };
-		6926CAA323126BB100B39BF2 /* UIViewController+ShouldAutorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926CA8223126BB100B39BF2 /* UIViewController+ShouldAutorotate.m */; };
-		6926CAA423126BB100B39BF2 /* WMPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6926CA8423126BB100B39BF2 /* WMPlayer.bundle */; };
-		6926CAA523126BB100B39BF2 /* WMLightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926CA8723126BB100B39BF2 /* WMLightView.m */; };
-		6926CAA623126BB100B39BF2 /* FastForwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926CA8823126BB100B39BF2 /* FastForwardView.m */; };
-		6926CAA723126BB100B39BF2 /* WMPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926CA8923126BB100B39BF2 /* WMPlayer.m */; };
 		6926CCF52312889100B39BF2 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6926CCF42312889100B39BF2 /* DiscoverTableViewCell.swift */; };
-		6926CCFB23129BAE00B39BF2 /* VideoDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926CCF923129BAE00B39BF2 /* VideoDataModel.m */; };
 		6927D5F222BC8E5D005FDAB9 /* LHJSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6927D5F122BC8E5D005FDAB9 /* LHJSearchBar.swift */; };
 		6929BD78222CB16200EE13FA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6929BD77222CB16200EE13FA /* UIButton+Extension.swift */; };
 		6929BD7A222CC9B300EE13FA /* VisitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6929BD79222CC9B300EE13FA /* VisitorViewController.swift */; };
@@ -145,7 +137,6 @@
 		69883A8223102B510023C816 /* TestListBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69883A8123102B500023C816 /* TestListBaseView.swift */; };
 		69883A8423102B860023C816 /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69883A8323102B860023C816 /* TestTableViewCell.swift */; };
 		69883A8623102BE10023C816 /* PagingViewTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69883A8523102BE10023C816 /* PagingViewTableHeaderView.swift */; };
-		699997D523557B4100D66C56 /* HJImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699997D423557B4100D66C56 /* HJImageCache.swift */; };
 		69A306D622618AC900180F5A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A306D522618AC900180F5A /* UIColor+Extension.swift */; };
 		69A306D8226193A800180F5A /* PictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A306D7226193A800180F5A /* PictureCollectionViewCell.swift */; };
 		69A8C60423118A66006A3065 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A8C60323118A66006A3065 /* Masonry.framework */; };
@@ -203,17 +194,6 @@
 		690FD87A22C8A3B600388A6F /* CommentKeyBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentKeyBoardView.swift; sourceTree = "<group>"; };
 		69100A542354407B00717B01 /* EmoticonLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmoticonLayer.swift; path = "../../../../../../../../../Library/Autosave Information/微信聊天框表情/微信聊天框表情/EmoticonLayer.swift"; sourceTree = "<group>"; };
 		69215C082276E43C00962D46 /* HomeWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWebViewController.swift; sourceTree = "<group>"; };
-		6926CA7E23126BB100B39BF2 /* WMLightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMLightView.h; sourceTree = "<group>"; };
-		6926CA7F23126BB100B39BF2 /* WMPlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMPlayerModel.m; sourceTree = "<group>"; };
-		6926CA8023126BB100B39BF2 /* FastForwardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastForwardView.h; sourceTree = "<group>"; };
-		6926CA8223126BB100B39BF2 /* UIViewController+ShouldAutorotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShouldAutorotate.m"; sourceTree = "<group>"; };
-		6926CA8323126BB100B39BF2 /* UIViewController+ShouldAutorotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ShouldAutorotate.h"; sourceTree = "<group>"; };
-		6926CA8423126BB100B39BF2 /* WMPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WMPlayer.bundle; sourceTree = "<group>"; };
-		6926CA8523126BB100B39BF2 /* WMPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMPlayer.h; sourceTree = "<group>"; };
-		6926CA8623126BB100B39BF2 /* WMPlayerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMPlayerModel.h; sourceTree = "<group>"; };
-		6926CA8723126BB100B39BF2 /* WMLightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMLightView.m; sourceTree = "<group>"; };
-		6926CA8823126BB100B39BF2 /* FastForwardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastForwardView.m; sourceTree = "<group>"; };
-		6926CA8923126BB100B39BF2 /* WMPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMPlayer.m; sourceTree = "<group>"; };
 		6926CCED23127F8900B39BF2 /* Pods_新浪微博Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "Pods_新浪微博Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6926CCEF23127F8E00B39BF2 /* Pods_新浪微博UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "Pods_新浪微博UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6926CCF42312889100B39BF2 /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
@@ -401,7 +381,6 @@
 		69883A8123102B500023C816 /* TestListBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListBaseView.swift; sourceTree = "<group>"; };
 		69883A8323102B860023C816 /* TestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
 		69883A8523102BE10023C816 /* PagingViewTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingViewTableHeaderView.swift; sourceTree = "<group>"; };
-		699997D423557B4100D66C56 /* HJImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HJImageCache.swift; sourceTree = "<group>"; };
 		699DE71A233DE3D0005837AE /* libmav_ipc_router_dynamic.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libmav_ipc_router_dynamic.tbd; path = usr/lib/libmav_ipc_router_dynamic.tbd; sourceTree = SDKROOT; };
 		69A306D522618AC900180F5A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		69A306D7226193A800180F5A /* PictureCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -535,33 +514,6 @@
 			path = CommentKeyBoardView;
 			sourceTree = "<group>";
 		};
-		6926C98023126BB000B39BF2 /* WMPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				6926CA7E23126BB100B39BF2 /* WMLightView.h */,
-				6926CA7F23126BB100B39BF2 /* WMPlayerModel.m */,
-				6926CA8023126BB100B39BF2 /* FastForwardView.h */,
-				6926CA8123126BB100B39BF2 /* Category */,
-				6926CA8423126BB100B39BF2 /* WMPlayer.bundle */,
-				6926CA8523126BB100B39BF2 /* WMPlayer.h */,
-				6926CA8623126BB100B39BF2 /* WMPlayerModel.h */,
-				6926CA8723126BB100B39BF2 /* WMLightView.m */,
-				6926CA8823126BB100B39BF2 /* FastForwardView.m */,
-				6926CA8923126BB100B39BF2 /* WMPlayer.m */,
-			);
-			name = WMPlayer;
-			path = "../../../../../../../../Downloads/WMPlayer-master/WMPlayer";
-			sourceTree = "<group>";
-		};
-		6926CA8123126BB100B39BF2 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				6926CA8223126BB100B39BF2 /* UIViewController+ShouldAutorotate.m */,
-				6926CA8323126BB100B39BF2 /* UIViewController+ShouldAutorotate.h */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
 		6926CCF12312885300B39BF2 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -598,7 +550,6 @@
 				693FCF24229237360048B4AE /* UIViewController+Hook.swift */,
 				694E528222D0DB8F0010A7C7 /* UIImage + downsample.swift */,
 				69566A5C22D6EC2100F15932 /* Int + toString.swift */,
-				699997D423557B4100D66C56 /* HJImageCache.swift */,
 				69BBF3BD2358009A00F27C4F /* CGSize + Extension.swift */,
 			);
 			path = Extension;
@@ -918,7 +869,6 @@
 		6936FC54222B7066002B9A19 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				6926C98023126BB000B39BF2 /* WMPlayer */,
 				69AD984A230F827000ACA5AC /* JXPagingView-Swift */,
 				693CA84B2302AC5800984DC0 /* NetworkStatus */,
 				692C77D922D89E8500F81637 /* JXCategoryView */,
@@ -1355,7 +1305,6 @@
 				69365E56226D41E600E6E53E /* LICENSE.txt in Resources */,
 				6962705522B49F5400E9B8D5 /* Assets.xcassets in Resources */,
 				69365E5D226D45D000E6E53E /* db.sql in Resources */,
-				6926CAA423126BB100B39BF2 /* WMPlayer.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1467,13 +1416,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6952C522225EEBC100A8DC97 /* UIBarButtonItem+Extension.swift in Sources */,
-				69100A552354407B00717B01 /* EmoticonLayer.swift in Sources */,
 				692C785822D89E8500F81637 /* UIColor+JXAdd.m in Sources */,
 				692C785622D89E8500F81637 /* JXCategoryViewAnimator.m in Sources */,
 				692C785522D89E8500F81637 /* JXCategoryIndicatorParamsModel.m in Sources */,
 				69BBF3C22358430600F27C4F /* AlertController.swift in Sources */,
 				69A306D8226193A800180F5A /* PictureCollectionViewCell.swift in Sources */,
-				6926CCFB23129BAE00B39BF2 /* VideoDataModel.m in Sources */,
 				69E366852313DF87003933D3 /* DiscoverCellBottomView.swift in Sources */,
 				692C785322D89E8500F81637 /* JXCategoryFactory.m in Sources */,
 				69396A7D2248F3F30005E981 /* StatusTopView.swift in Sources */,
@@ -1508,7 +1455,6 @@
 				69365E5F226D6BE800E6E53E /* StatusDAL.swift in Sources */,
 				69E366832313CE01003933D3 /* DiscoverCellTopView.swift in Sources */,
 				692C783B22D89E8500F81637 /* JXCategoryIndicatorImageView.m in Sources */,
-				6926CAA223126BB100B39BF2 /* WMPlayerModel.m in Sources */,
 				69365E58226D41E600E6E53E /* FMDatabaseAdditions.m in Sources */,
 				69365E59226D41E600E6E53E /* FMDatabase.m in Sources */,
 				690FD87B22C8A3B600388A6F /* CommentKeyBoardView.swift in Sources */,
@@ -1519,7 +1465,6 @@
 				69365E5A226D41E600E6E53E /* FMDatabasePool.m in Sources */,
 				6936FC62222B7294002B9A19 /* MessageViewController.swift in Sources */,
 				69AD9852230F827000ACA5AC /* JXPagingListContainerView.swift in Sources */,
-				699997D523557B4100D66C56 /* HJImageCache.swift in Sources */,
 				693FCF232291A75D0048B4AE /* RTHook.swift in Sources */,
 				692C783E22D89E8500F81637 /* JXCategoryIndicatorDotLineView.m in Sources */,
 				69E3668923143614003933D3 /* VideoViewController.swift in Sources */,
@@ -1555,7 +1500,6 @@
 				6962709822B6262700E9B8D5 /* MessageTableViewCellTypeTwo.swift in Sources */,
 				692C784C22D89E8500F81637 /* JXCategoryImageView.m in Sources */,
 				692C784422D89E8500F81637 /* JXCategoryDotView.m in Sources */,
-				6926CAA723126BB100B39BF2 /* WMPlayer.m in Sources */,
 				692C783522D89E8500F81637 /* JXCategoryTitleVerticalZoomCellModel.m in Sources */,
 				6962709A22B62F9400E9B8D5 /* NotifyTableViewController.swift in Sources */,
 				692A01602252494500131A21 /* RefreshControl.swift in Sources */,
@@ -1563,7 +1507,6 @@
 				692C784A22D89E8500F81637 /* JXCategoryTitleCell.m in Sources */,
 				692C785B22D89E8500F81637 /* JXCategoryBaseCellModel.m in Sources */,
 				693FCF25229237360048B4AE /* UIViewController+Hook.swift in Sources */,
-				6926CAA523126BB100B39BF2 /* WMLightView.m in Sources */,
 				692EF4B122D47D92008A2F81 /* CommentListViewModel.swift in Sources */,
 				6929BD7D222CD00E00EE13FA /* VisitorView.swift in Sources */,
 				69693BEA22584D0F001EB21B /* FPSLabel.swift in Sources */,
@@ -1580,7 +1523,6 @@
 				6933AE412230F1B5003612CA /* UserAccount.swift in Sources */,
 				69396A742248C84E0005E981 /* StatusListViewModel.swift in Sources */,
 				692E0D072265B4D9002F84C2 /* PhotoBrowserTransitioningDelegate.swift in Sources */,
-				6926CAA323126BB100B39BF2 /* UIViewController+ShouldAutorotate.m in Sources */,
 				69883A8423102B860023C816 /* TestTableViewCell.swift in Sources */,
 				692C784D22D89E8500F81637 /* JXCategoryImageCell.m in Sources */,
 				69C5C0D0224A0B270000D39D /* StatusPictureView.swift in Sources */,
@@ -1596,7 +1538,6 @@
 				692C783922D89E8500F81637 /* JXCategoryIndicatorTriangleView.m in Sources */,
 				69EF550B233C424F0029A6E8 /* HLLabel.swift in Sources */,
 				69E3668723142321003933D3 /* DiscoverCellDescriptionView.swift in Sources */,
-				6926CAA623126BB100B39BF2 /* FastForwardView.m in Sources */,
 				6952C5D92260FF0C00A8DC97 /* PhotoBrowserViewController.swift in Sources */,
 				69396A7222487A020005E981 /* Status.swift in Sources */,
 				693CA84A2302AC5300984DC0 /* Reachability.m in Sources */,
@@ -1785,21 +1726,17 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/新浪微博/Classes/Tools/WMPlayer/WNPlayer/FFmpeg/lib",
-					"$(PROJECT_DIR)/新浪微博/Classes/Tools/WMPlayer/WNPlayer/openssl/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "SinaWeiBo.lhj.----";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/lianghuajian/Desktop/iOS学习/Swift学习/项目/新浪微博/新浪微博/Swift-Bridge-ObjectiveC.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/新浪微博/Swift-Bridge-ObjectiveC.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/新浪微博/Classes/Tools/WMPlayer/WNPlayer/FFmpeg/include/**";
+				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;
 			};
 			name = Debug;
@@ -1822,20 +1759,16 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/新浪微博/Classes/Tools/WMPlayer/WNPlayer/FFmpeg/lib",
-					"$(PROJECT_DIR)/新浪微博/Classes/Tools/WMPlayer/WNPlayer/openssl/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "SinaWeiBo.lhj.----";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/lianghuajian/Desktop/iOS学习/Swift学习/项目/新浪微博/新浪微博/Swift-Bridge-ObjectiveC.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/新浪微博/Swift-Bridge-ObjectiveC.h";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/新浪微博/Classes/Tools/WMPlayer/WNPlayer/FFmpeg/include/**";
+				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;
 			};
 			name = Release;

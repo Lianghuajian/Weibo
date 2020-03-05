@@ -77,7 +77,7 @@ class CommentViewController: UIViewController {
         tableView.register(OriginStatusCell.self, forCellReuseIdentifier: CellID.OriginStatusCellID.rawValue)
         tableView.register(RetweetedStatusCell.self, forCellReuseIdentifier:CellID.RetweetedStatusCellID.rawValue)
         tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: refreshCommentTableView)
-        (tableView.mj_header as? MJRefreshStateHeader)?.lastUpdatedTimeLabel.isHidden = true
+        (tableView.mj_header as? MJRefreshStateHeader)?.lastUpdatedTimeLabel?.isHidden = true
 
     }
     
@@ -88,13 +88,13 @@ class CommentViewController: UIViewController {
             
             guard let viewModels = viewModels else
             {
-                self?.tableView.mj_header.endRefreshing()
+                self?.tableView.mj_header?.endRefreshing()
                 return 
             }
             
             self?.commentListViewModel.viewModels = viewModels
             
-            self?.tableView.mj_header.endRefreshing()
+            self?.tableView.mj_header?.endRefreshing()
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -146,12 +146,6 @@ class CommentViewController: UIViewController {
             make.height.equalTo(CommentKeyBoardView.recommendHeight)
         }
         
-        
-        emoticonLayer.backgroundColor = UIColor.clear.cgColor
-        
-        self.view.layer.addSublayer(emoticonLayer)
-        
-        
         commentKeyBoardView.delegate = self
         viewAboveTableView.isHidden = true
     }
@@ -163,8 +157,6 @@ class CommentViewController: UIViewController {
         
         return sbv
     }()
-    
-    let emoticonLayer = EmoticonLayer()
     
     lazy var commentKeyBoardView = CommentKeyBoardView()
     ///评论View的位置
@@ -313,8 +305,6 @@ extension CommentViewController : StatusBottomViewClickDelegate
 extension CommentViewController : CommentKeyBoardViewDelegate
 {
     func didClickSend(commentKeyBoardView: CommentKeyBoardView, content: String) {
-    
-    emoticonLayer.emit(text: "微笑")
         
     NetworkTool.shared.postAComments(statusID: commentKeyBoardView.statusViewModel!.status.id, comment: content) { (data, error) in
         if error == nil

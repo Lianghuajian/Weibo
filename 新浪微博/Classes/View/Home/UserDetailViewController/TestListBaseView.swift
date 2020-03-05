@@ -18,9 +18,9 @@ import UIKit
                 self.tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
             }else if self.tableView.mj_header != nil {
                 
-                self.tableView.mj_header.endRefreshing()
+                self.tableView.mj_header?.endRefreshing()
                 
-                self.tableView.mj_header.removeFromSuperview()
+                self.tableView.mj_header?.removeFromSuperview()
                 
                 self.tableView.mj_header = nil
             }
@@ -31,8 +31,8 @@ import UIKit
             if isNeedFooter {
                 tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMore))
             }else if self.tableView.mj_footer != nil {
-                self.tableView.mj_footer.endRefreshing()
-                self.tableView.mj_footer.removeFromSuperview()
+                self.tableView.mj_footer?.endRefreshing()
+                self.tableView.mj_footer?.removeFromSuperview()
                 self.tableView.mj_footer = nil
             }
         }
@@ -69,7 +69,7 @@ import UIKit
     func beginFirstRefresh() {
         if !isHeaderRefreshed {
             if (self.isNeedHeader) {
-                self.tableView.mj_header.beginRefreshing()
+                self.tableView.mj_header?.beginRefreshing()
                 headerRefresh()
             }else {
                 self.isHeaderRefreshed = true
@@ -80,7 +80,7 @@ import UIKit
 
     @objc func headerRefresh() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(2)) {
-            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_header?.endRefreshing()
             self.isHeaderRefreshed = true
             self.tableView.reloadData()
         }
@@ -100,7 +100,7 @@ import UIKit
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(2)) {
             self.dataSource?.append("加载更多成功")
             self.tableView.reloadData()
-            self.tableView.mj_footer.endRefreshing()
+            self.tableView.mj_footer?.endRefreshing()
         }
     }
 

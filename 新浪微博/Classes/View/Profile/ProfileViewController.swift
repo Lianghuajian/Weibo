@@ -32,8 +32,6 @@ class ProfileViewController: VisitorViewController {
         
         super.viewDidLoad()
         
-        self.view.backgroundColor = .black
-        
         print(userAccountViewModel.accountPath)
         
         if !UserAccountViewModel.shared.userLoginStatus {
@@ -73,7 +71,6 @@ class ProfileViewController: VisitorViewController {
             
         }
         setUpUI()
-       
     }
     
     func prepareTableView(){
